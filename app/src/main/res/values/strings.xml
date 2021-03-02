@@ -2,4 +2,10 @@
     <string name="app_name">AdoptrApp</string>
     <string name="hello_first_fragment">Hello first fragment!</string>
     <string name="toFirstFragment">Page 1</string>
+    <string name="support_page_header_text">Support Ticket Page</string>
+    <string name="support_spinner1">Select the topic of the ticket:</string>
+    <string name="support_spinner2">Narrow down the reason of the ticket:</string>
+    <string name="support_page_descriptionText">Please add addition comments for the ticket:</string>
+    <string name="supportDescriptionBox">Description</string>
+    <string name="support_page_submit_ticket">Submit Ticket</string>
 </resources>
