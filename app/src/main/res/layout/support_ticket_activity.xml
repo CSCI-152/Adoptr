@@ -6,16 +6,9 @@
     android:layout_height="match_parent">
 
     <!--
-    @spinnerMenu2 should be generated have stuff like:
-        Bug, Interactions/Communication, Harassment,
-        General Support, Other
-    -->
-
-    <!--
     @spinnerMenu1 should have stuff like:
         Account, App, Shelter, User, Other..
     -->
-
     <Spinner
         android:id="@+id/spinnerMenu1"
         android:layout_width="0dp"
@@ -33,7 +26,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextDescriptionBox"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="32dp"
@@ -73,7 +66,11 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerMenu2" />
-
+    <!--
+        @spinnerMenu2 should be generated have stuff like:
+            Bug, Interactions/Communication, Harassment,
+            General Support, Other
+    -->
     <Spinner
         android:id="@+id/spinnerMenu2"
         android:layout_width="0dp"
@@ -103,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submitTicketButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -114,7 +111,7 @@
         android:text="@string/support_page_submit_ticket"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescriptionBox" />
 
     <TextView
         android:id="@+id/textView3"

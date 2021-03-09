@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_login"
+            android:title="@string/navDrawer_login" />
+        <item
+            android:id="@+id/nav_register"
+            android:title="@string/navDrawer_register" />
+        <item
+            android:id="@+id/nav_profile"
+            android:title="@string/navDrawer_profile" />
+        <item
+            android:id="@+id/nav_help"
+            android:title="@string/navDrawer_help" />
+        <item
+            android:id="@+id/nav_support_ticket"
+            android:title="@string/navDrawer_support_ticket" />
+        <item
+            android:id="@+id/nav_contact"
+            android:title="@string/navDrawer_contact" />
+
+    </group>
+</menu>

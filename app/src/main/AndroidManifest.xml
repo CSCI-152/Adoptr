@@ -10,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity2"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".SupportTicketActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".LandingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

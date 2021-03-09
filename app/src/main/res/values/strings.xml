@@ -8,4 +8,12 @@
     <string name="support_page_descriptionText">Please add addition comments for the ticket:</string>
     <string name="supportDescriptionBox">Description</string>
     <string name="support_page_submit_ticket">Submit Ticket</string>
+    <string name="navDrawer_login">Login</string>
+    <string name="navDrawer_profile">Profile</string>
+    <string name="navDrawer_help">Help</string>
+    <string name="navDrawer_support_ticket">Support Ticket</string>
+    <string name="navDrawer_contact">Contact</string>
+    <string name="navDrawer_register">Sign Up</string>
+    <string name="adoptr_logo">adoptr_logo</string>
+
 </resources>
