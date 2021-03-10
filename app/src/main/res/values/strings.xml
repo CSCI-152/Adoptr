@@ -15,5 +15,12 @@
     <string name="navDrawer_contact">Contact</string>
     <string name="navDrawer_register">Sign Up</string>
     <string name="adoptr_logo">adoptr_logo</string>
+    <string name="navBottom_profile">Profile</string>
+    <string name="navBottom_messages">Messages</string>
+    <string name="navBottom_home">Home</string>
+    <string name="navBottom_search">Search</string>
+    <string name="navBottom_articles">Articles</string>
+    <string name="navDrawer_createListing">Create Listing</string>
+    <string name="navDrawer_signout">Sign Out</string>
 
 </resources>

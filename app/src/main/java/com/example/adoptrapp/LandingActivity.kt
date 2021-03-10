@@ -51,11 +51,11 @@ class LandingActivity : AppCompatActivity() {
                     drawerLayout?.closeDrawers()
                     true
                 }
-                R.id.nav_profile -> {
+                R.id.nav_createListing -> {
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    Toast.makeText(this.baseContext,"Profile Selected",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.baseContext,"Create Listing Selected",Toast.LENGTH_SHORT).show()
                     drawerLayout?.closeDrawers()
                     true
                 }
@@ -81,6 +81,14 @@ class LandingActivity : AppCompatActivity() {
                     it.isChecked = true
                     // the toast is for testing purposes only
                     Toast.makeText(this, "Contact Selected", Toast.LENGTH_SHORT).show()
+                    drawerLayout?.closeDrawers()
+                    true
+                }
+                R.id.nav_signout -> {
+                    // onclick event
+                    it.isChecked = true
+                    // the toast is for testing purposes only
+                    Toast.makeText(this, "Sign Out Selected", Toast.LENGTH_SHORT).show()
                     drawerLayout?.closeDrawers()
                     true
                 }

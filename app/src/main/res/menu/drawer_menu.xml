@@ -9,8 +9,8 @@
             android:id="@+id/nav_register"
             android:title="@string/navDrawer_register" />
         <item
-            android:id="@+id/nav_profile"
-            android:title="@string/navDrawer_profile" />
+            android:id="@+id/nav_createListing"
+            android:title="@string/navDrawer_createListing" />
         <item
             android:id="@+id/nav_help"
             android:title="@string/navDrawer_help" />
@@ -20,6 +20,9 @@
         <item
             android:id="@+id/nav_contact"
             android:title="@string/navDrawer_contact" />
+        <item
+            android:id="@+id/nav_signout"
+            android:title="@string/navDrawer_signout" />
 
     </group>
 </menu>
