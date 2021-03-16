@@ -10,14 +10,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import com.example.adoptrapp.Login as Login
-import com.example.adoptrapp.User as User
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private var bannerImage: ImageView? = null
     private var loginButton: Button? = null
@@ -60,9 +55,9 @@ class Login : AppCompatActivity() {
                         task ->
 
                     if (!task.isSuccessful){
-                        Toast.makeText(this@Login, "Login Failed.",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@LoginActivity, "Login Failed.",Toast.LENGTH_LONG).show()
                     }else{
-                        startActivity(Intent(this@Login,MainActivity::class.java))
+                        startActivity(Intent(this@LoginActivity,LandingActivity::class.java))
                         finish()
                     }
                 })

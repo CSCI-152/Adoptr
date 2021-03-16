@@ -38,7 +38,8 @@ class LandingActivity : AppCompatActivity() {
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    Toast.makeText(this.baseContext,"Login Selected",Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
                     drawerLayout?.closeDrawers()
                     true
                 }
