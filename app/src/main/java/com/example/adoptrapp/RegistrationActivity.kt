@@ -22,9 +22,7 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
     private var editTextPassword: EditText? = null
     private var editTextConfirmPassword: EditText? = null
 
-
     private var mAuth: FirebaseAuth? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
