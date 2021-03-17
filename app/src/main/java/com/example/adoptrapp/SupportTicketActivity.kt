@@ -7,10 +7,11 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import android.content.ContentValues.TAG
+import kotlin.math.ceil
 
 class SupportTicketActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var backButton: Button? = null // need to add a button to exit this activity
+    // private var backButton: Button? = null // need to add a button to exit this activity
     private var submitButton: Button? = null
 
     private val db = FirebaseFirestore.getInstance()
@@ -31,8 +32,12 @@ class SupportTicketActivity : AppCompatActivity(), View.OnClickListener {
         val localSpinner1 = spinner1
         val localSpinner2 = spinner2
 
-        val list1 = arrayOf("Account", "App", "Shelter", "User", "Other")
+        val list1 = arrayOf("App", "Shelter", "User", "Account", "Other")
+        // Priority Weights
+        // App = 1, Shelter = 2, User = 3, Account = 4, other = 5
         val list2 = arrayOf("Bug", "Interaction", "Harassment", "General Support", "Other")
+        // Priority Weights
+        // Bug = 1, Interaction = 2, Harassment = 3, General = 4,  Other = 5
 
         // need to make is so the initial item is a non-selectable item
         // Populating spinner1 with list1
@@ -92,8 +97,52 @@ class SupportTicketActivity : AppCompatActivity(), View.OnClickListener {
             return false
         }
 
+
+        // Calculating the weights for the issues
+        // Priority Weights
+        // App = 1, Shelter = 2, User = 3, Account = 4, Other = 5
+        // Bug = 1, Interaction = 2, Harassment = 3, General = 4,  Other = 5
+        var priorityOfTopic = 0
+        var priorityOfReason = 0
+        when (topic){
+            "App" -> {
+                priorityOfTopic = 1
+            }
+            "Shelter" -> {
+                priorityOfTopic = 2
+            }
+            "User" -> {
+                priorityOfTopic = 3
+            }
+            "Account" -> {
+                priorityOfTopic = 4
+            }
+            "Other" -> {
+                priorityOfTopic = 5
+            }
+        }
+
+        when (reason){
+            "Bug" -> {
+                priorityOfReason = 1
+            }
+            "Interaction" -> {
+                priorityOfReason = 2
+            }
+            "Harassment" -> {
+                priorityOfReason = 3
+            }
+            "General" -> {
+                priorityOfReason = 4
+            }
+            "Other" -> {
+                priorityOfReason = 5
+            }
+        }
+        // highest priority should be 2
+        val sumPriority = priorityOfTopic + priorityOfReason
         // SEND THE DATA TO FIRESTORE
-        val data = ClassTicket(topic, reason, desc)
+        val data = ClassTicket(topic, reason, desc, sumPriority)
         // add() makes a auto generated id
         db.collection("supportTickets")
             .add(data)
@@ -108,5 +157,4 @@ class SupportTicketActivity : AppCompatActivity(), View.OnClickListener {
         Toast.makeText(this.baseContext,"Ticket Submitted", Toast.LENGTH_SHORT).show()
         return true
     }
-
 }
