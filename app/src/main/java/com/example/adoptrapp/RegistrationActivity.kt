@@ -1,16 +1,18 @@
 package com.example.adoptrapp
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.adoptrapp.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -22,9 +24,8 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
     private var editTextPassword: EditText? = null
     private var editTextConfirmPassword: EditText? = null
 
-
     private var mAuth: FirebaseAuth? = null
-
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,22 +118,17 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
             ?.addOnCompleteListener(object: OnCompleteListener<AuthResult> {
                 override fun onComplete(p0: Task<AuthResult>) {
                     if (p0.isSuccessful) {
-                        val user = User(fullName = fullName, email = email)
-
+                        val user = ClassUser(fullName, email)
+                        // Listeners put errors in the log (Logcat)
                         // the error numbers are temp to distinguish which failure was encountered
-                        FirebaseAuth.getInstance().currentUser?.let {
-                            FirebaseDatabase.getInstance().getReference("Users")
-                                .child(it.uid)
-                                .setValue(user).addOnCompleteListener(object: OnCompleteListener<Void>{
-                                    override fun onComplete(p0: Task<Void>) = if (p0.isSuccessful) {
-                                        Toast.makeText(this@RegistrationActivity, "Account successfully registered!", Toast.LENGTH_LONG).show()
-                                    }
-                                    else {
-                                        Toast.makeText(this@RegistrationActivity, "Account registration failed. ERROR: 01", Toast.LENGTH_LONG).show()
-                                    }
-
-                                })
-                        }
+                        db.collection("users")
+                                .document(FirebaseAuth.getInstance().currentUser.uid).set(user)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this@RegistrationActivity, "Account successfully registered!", Toast.LENGTH_LONG).show()
+                                }
+                                .addOnFailureListener {
+                                    Toast.makeText(this@RegistrationActivity, "Account registration failed. ERROR: 01", Toast.LENGTH_LONG).show()
+                                }
                     }
                     else {
                         Toast.makeText(this@RegistrationActivity, "Account registration failed. ERROR: 02", Toast.LENGTH_LONG).show()
