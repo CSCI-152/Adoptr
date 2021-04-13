@@ -22,5 +22,12 @@
     <string name="navBottom_articles">Articles</string>
     <string name="navDrawer_createListing">Create Listing</string>
     <string name="navDrawer_signout">Sign Out</string>
+    <string name="button_update_name">Update Name</string>
+    <string name="button_change_password">Change Password</string>
+    <string name="profile_currentUserName">currentUserName</string>
+    <string name="profile_nameHeaderText">Name:</string>
+    <string name="profile_pageHeaderText">Profile</string>
+    <string name="profile_currentUserEmail">currentUserEmail</string>
+    <string name="profile_emailHeaderText">Email:</string>
 
 </resources>
