@@ -1,0 +1,2 @@
+com/example/adoptrapp/BuildConfig.java
+ com.example.adoptrapp.BuildConfig
