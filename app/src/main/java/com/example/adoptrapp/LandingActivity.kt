@@ -34,6 +34,20 @@ class LandingActivity : AppCompatActivity() {
 
         navigationView?.setNavigationItemSelectedListener {
             when(it.itemId) {
+                R.id.nav_admin -> {
+                    it.isChecked = true
+                    val intent = Intent(this, Admin::class.java)
+                    startActivity(intent)
+                    drawerLayout?.closeDrawers()
+                    true
+                }
+                R.id.nav_create -> {
+                    it.isChecked = true
+                    val intent = Intent(this, CreatePost::class.java)
+                    startActivity(intent)
+                    drawerLayout?.closeDrawers()
+                    true
+                }
                 R.id.nav_login -> {
                     // onclick event
                     it.isChecked = true

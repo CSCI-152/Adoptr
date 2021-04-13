@@ -8,6 +8,8 @@
     <string name="support_page_descriptionText">Please add addition comments for the ticket:</string>
     <string name="supportDescriptionBox">Description</string>
     <string name="support_page_submit_ticket">Submit Ticket</string>
+    <string name="navDrawer_admin">Admin</string>
+    <string name="navDrawer_create_new_post">Create new post</string>
     <string name="navDrawer_login">Login</string>
     <string name="navDrawer_profile">Profile</string>
     <string name="navDrawer_help">Help</string>
@@ -22,5 +24,9 @@
     <string name="navBottom_articles">Articles</string>
     <string name="navDrawer_createListing">Create Listing</string>
     <string name="navDrawer_signout">Sign Out</string>
+
+    //admin buttons text
+    <string name="view_report">View Reports</string>
+    <string name="view_user">View Users</string>
 
 </resources>
