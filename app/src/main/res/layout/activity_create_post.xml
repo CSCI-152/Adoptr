@@ -11,18 +11,18 @@
         android:layout_width="381dp"
         android:layout_height="254dp"
         android:layout_marginTop="60dp"
+        android:contentDescription="@string/firebase_database_url"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logotext"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/logotext" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="383dp"
         android:layout_height="161dp"
-        android:text="@string/description"
+        android:text="@string/supportDescriptionBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.571"
@@ -34,7 +34,7 @@
         android:id="@+id/shelter"
         android:layout_width="264dp"
         android:layout_height="94dp"
-        android:text="@string/textview"
+        android:text="@string/navDrawer_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

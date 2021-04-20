@@ -22,5 +22,7 @@
     <string name="navBottom_articles">Articles</string>
     <string name="navDrawer_createListing">Create Listing</string>
     <string name="navDrawer_signout">Sign Out</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

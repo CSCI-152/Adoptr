@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 abstract class CreatePost : AppCompatActivity(), View.OnClickListener {
 
+
     private var petUpload: ImageView? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +18,7 @@ abstract class CreatePost : AppCompatActivity(), View.OnClickListener {
 
         petUpload = findViewById<ImageView>(R.id.petUpload)
         petUpload!!.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View?) {
@@ -26,9 +28,16 @@ abstract class CreatePost : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
 
 
+
+
+
+
             }
+
 
 
         }
     }
+
 }
+
