@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/landingActivity">
+
+    <activity
+        android:id="@+id/landingActivity"
+        android:name="com.example.adoptrapp.LandingActivity"
+        android:label="landing_activity"
+        tools:layout="@layout/landing_activity" >
+        <action
+            android:id="@+id/action_landingActivity_to_supportTicketActivity"
+            app:destination="@id/supportTicketActivity" />
+        <action
+            android:id="@+id/action_landingActivity_to_registrationActivity"
+            app:destination="@id/registrationActivity" />
+        <action
+            android:id="@+id/action_landingActivity_to_loginActivity"
+            app:destination="@id/loginActivity" />
+    </activity>
+
+    <activity
+        android:id="@+id/supportTicketActivity"
+        android:name="com.example.adoptrapp.SupportTicketActivity"
+        android:label="SupportTicketActivity" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.adoptrapp.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/registrationActivity"
+        android:name="com.example.adoptrapp.RegistrationActivity"
+        android:label="registration_activity"
+        tools:layout="@layout/registration_activity" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navBottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/nav_bottom_color"
+        app:itemTextColor="@color/nav_bottom_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:menu="@menu/bottom_menu" />
+
+</navigation>

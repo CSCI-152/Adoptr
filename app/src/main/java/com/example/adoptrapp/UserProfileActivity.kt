@@ -1,13 +1,16 @@
 package com.example.adoptrapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import io.grpc.InternalChannelz.id
 
 class UserProfileActivity : AppCompatActivity(), View.OnClickListener  {
 
@@ -17,40 +20,23 @@ class UserProfileActivity : AppCompatActivity(), View.OnClickListener  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_activity)
 
-
+        // need to implement the petmark system
+        val buttonSendToPasswordReset: Button = findViewById(R.id.profileChangePassButton)
+        buttonSendToPasswordReset.setOnClickListener() {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            finish()                // closes the current intent
+            startActivity(intent)   // sends to the new intent
+        }
     }
-
 
     override fun onClick(v: View?) {
         when (v?.id){
-            R.id.profileChangeNameButton -> {
-                // makes a prompt popup with current user name then saves as
-                // the submitted name as the new name
-
-
-            }
             R.id.profileChangePassButton -> {
-
+                // Sends the user to the change password page
+                val intent = Intent(this, ForgotPasswordActivity::class.java)
+                finish()                // closes the current intent
+                startActivity(intent)   // sends to the new intent
             }
-        }
-    }
-
-    private fun updateName(): Boolean {
-        if (FirebaseAuth.getInstance().currentUser != null){
-            val user = db.collection("users")
-                    .document(FirebaseAuth.getInstance().currentUser.uid).get().addOnSuccessListener {
-                        documentSnapshot ->
-                        findViewById<EditText>(R.id.currentUserEmail).text = (documentSnapshot.toObject<ClassUser>()).fullName
-                    }
-            return true
-        }
-        // if the user isn't signed in return a failed signal
-        return false
-    }
-
-    private fun changePassword(): Boolean{
-        if (FirebaseAuth.getInstance().currentUser != null) {
-            AuthCredential cred = email
         }
     }
 }

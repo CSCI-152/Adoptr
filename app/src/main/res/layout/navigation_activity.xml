@@ -13,33 +13,33 @@ This makes the drawer button in the topleft
     android:fitsSystemWindows="true">
 
     <!-- Contents that should appear on the page should be in the ConstraintLayout tag -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/include2"
-            layout="@layout/toolbar_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/my_toolBar"
+            android:theme="@style/Theme.AdoptrApp"
+            android:background="?attr/colorPrimary" />
 
-        <!-- This creates the bottom navigation bar -->
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <fragment
+            android:id="@+id/myNavHostFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toBottomOf="@+id/navBottom_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include2">
+            app:layout_constraintTop_toBottomOf="@+id/include2"
+            tools:ignore="MissingClass">
 
-        </FrameLayout>
+        </fragment>
 
+        <!-- This creates the bottom navigation bar -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navBottom_menu"
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@ This makes the drawer button in the topleft
             app:layout_constraintLeft_toLeftOf="parent"
             app:menu="@menu/bottom_menu" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"

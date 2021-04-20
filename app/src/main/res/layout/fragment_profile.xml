@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--This makes the drawer button in the topleft-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentProfile">
+
+    <Button
+        android:id="@+id/profileChangePassButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center_horizontal"
+
+        android:text="@string/button_change_password" />
+
+    <Button
+        android:id="@+id/profileTempButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:layout_gravity="center_horizontal"
+
+        android:text="Temp Add PetMarked"
+        tools:ignore="HardcodedText" />
+
+    <LinearLayout
+        android:id="@+id/profilePetMarks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="208dp"
+        android:orientation="vertical">
+
+
+    </LinearLayout>
+
+</FrameLayout>
+
+

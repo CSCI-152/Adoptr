@@ -20,32 +20,15 @@ This makes the drawer button in the topleft
         android:layout_height="match_parent" >
 
         <Button
-            android:id="@+id/profileChangeNameButton"
+            android:id="@+id/oldprofileChangePassButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/button_update_name"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentUserName"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/profileChangePassButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
             android:text="@string/button_change_password"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currentUserEmail"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
         <include
             android:id="@+id/include"
@@ -54,98 +37,20 @@ This makes the drawer button in the topleft
         <!--
         This creates the bottom navigation bar
         -->
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navBottom_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_menu"
+            app:itemIconTint="@color/nav_bottom_color"
             app:itemTextColor="@color/nav_bottom_color"
-            app:itemIconTint="@color/nav_bottom_color"/>
-
-        <EditText
-            android:id="@+id/currentUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/profile_currentUserName"
-            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userNameHeader"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/userNameHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/profile_nameHeaderText"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileHeader"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/profileHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/profile_pageHeaderText"
-            android:textSize="36sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include"
-            app:layout_constraintVertical_bias="0.066" />
-
-        <TextView
-            android:id="@+id/currentUserEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/profile_currentUserEmail"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userEmailHeader"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/userEmailHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/profile_emailHeaderText"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileChangeNameButton"
-            app:layout_constraintVertical_bias="0.0" />
+            app:menu="@menu/bottom_menu" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
