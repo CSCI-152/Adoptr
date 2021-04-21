@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "310810252958",
+    "firebase_url": "https://project-7ae8e-default-rtdb.firebaseio.com",
+    "project_id": "project-7ae8e",
+    "storage_bucket": "project-7ae8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310810252958:android:0dd08fbc2c4af56082cd8f",
+        "android_client_info": {
+          "package_name": "com.example.adoptrapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310810252958-kikl2lrkh564khbdktf4k30vl4pn2c4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbZYy1aQhsU4_hA5-peVAwPLtH47MjD6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310810252958-kikl2lrkh564khbdktf4k30vl4pn2c4m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
