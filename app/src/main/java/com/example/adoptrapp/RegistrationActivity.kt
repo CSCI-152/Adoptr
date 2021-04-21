@@ -121,7 +121,7 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
                     // Listeners put errors in the log (Logcat)
                     // the error numbers are temp to distinguish which failure was encountered
                     db.collection("users")
-                            .document(FirebaseAuth.getInstance().currentUser.uid).set(user)
+                            .document(FirebaseAuth.getInstance().currentUser!!.uid).set(user)
                             .addOnSuccessListener {
                                 Toast.makeText(this@RegistrationActivity,
                                         "Account successfully registered!",
