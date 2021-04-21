@@ -24,12 +24,12 @@
         "source": "C:\\Users\\Austin\\AndroidStudioProjects\\Adoptr\\app\\src\\main\\res\\drawable-xxhdpi\\ic_action_white.png"
     },
     {
-        "merged": "C:\\Users\\Austin\\AndroidStudioProjects\\Adoptr\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_launcher_background.png.flat",
-        "source": "C:\\Users\\Austin\\AndroidStudioProjects\\Adoptr\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_launcher_background.png"
-    },
-    {
         "merged": "C:\\Users\\Austin\\AndroidStudioProjects\\Adoptr\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_action_white.png.flat",
         "source": "C:\\Users\\Austin\\AndroidStudioProjects\\Adoptr\\app\\src\\main\\res\\drawable-hdpi\\ic_action_white.png"
+    },
+    {
+        "merged": "C:\\Users\\Austin\\AndroidStudioProjects\\Adoptr\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\Austin\\AndroidStudioProjects\\Adoptr\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_launcher_background.png"
     },
     {
         "merged": "C:\\Users\\Austin\\AndroidStudioProjects\\Adoptr\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_article.png.flat",
