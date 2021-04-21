@@ -4,13 +4,16 @@
     package="com.example.adoptrapp">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ViewUser"></activity>
+        <activity android:name=".CreatePost" />
+        <activity android:name=".ViewReport" />
+        <activity android:name=".Admin" />
         <activity android:name=".SupportTicketActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".LoginActivity" />
@@ -23,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-      
+
     </application>
+
 </manifest>

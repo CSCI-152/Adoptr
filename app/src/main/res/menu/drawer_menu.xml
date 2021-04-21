@@ -4,6 +4,12 @@
 
         <!-- Hide when Signed in -->
         <item
+            android:id="@+id/nav_admin"
+            android:title="@string/navDrawer_admin" />
+        <item
+            android:id="@+id/nav_create"
+            android:title="@string/navDrawer_create_new_post"/>
+        <item
             android:id="@+id/nav_login"
             android:title="@string/navDrawer_login"
             android:menuCategory="secondary"
