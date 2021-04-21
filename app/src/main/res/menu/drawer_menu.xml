@@ -7,7 +7,7 @@
             android:id="@+id/nav_admin"
             android:title="@string/navDrawer_admin" />
         <item
-            android:id="@+id/nav_create"
+            android:id="@+id/nav_createPost"
             android:title="@string/navDrawer_create_new_post"/>
         <item
             android:id="@+id/nav_login"
@@ -21,11 +21,6 @@
             android:title="@string/navDrawer_register"
             android:menuCategory="secondary"
             android:visible="true" />
-
-        <item
-            android:id="@+id/nav_createListing"
-            android:menuCategory="secondary"
-            android:title="@string/navDrawer_createListing" />
 
         <item
             android:id="@+id/nav_help"

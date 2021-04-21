@@ -10,10 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ViewUser"></activity>
-        <activity android:name=".CreatePost" />
+        <activity android:name=".ViewUser" />
+        <activity android:name=".CreatePostActivity" />
         <activity android:name=".ViewReport" />
-        <activity android:name=".Admin" />
+        <activity android:name=".AdminActivity" />
         <activity android:name=".SupportTicketActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".LoginActivity" />
