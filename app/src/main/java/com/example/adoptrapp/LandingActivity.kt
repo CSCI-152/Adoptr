@@ -5,19 +5,29 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
-class LandingActivity : AppCompatActivity() {
+class LandingActivity : AppCompatActivity(){
 
     private var drawerLayout: DrawerLayout? = null
     private var navigationView: NavigationView? = null
-    private var toolBar: Toolbar? = null
+    private var toolbar: Toolbar? = null
+    private var bottomNavigationView: BottomNavigationView? = null
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.landing_activity)
@@ -25,15 +35,34 @@ class LandingActivity : AppCompatActivity() {
         // Setting up the sidebar
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.navigationView)
-        toolBar = findViewById(R.id.my_toolBar)
+        toolbar = findViewById(R.id.my_toolBar)
+        bottomNavigationView = findViewById(R.id.navBottom_menu)
 
-        setSupportActionBar(toolBar)
+        // setting the initial fragment
+
+
+        setSupportActionBar(toolbar)
         val actionBar: ActionBar? = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar)
 
+        bottomNavigationView?.selectedItemId = R.id.navBottom_home
         navigationView?.setNavigationItemSelectedListener {
-            when(it.itemId) {
+            // need to load a different toolbar menu based on user log in status
+            if (Firebase.auth.currentUser != null) {
+                // User is signed in
+                navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = false       // hide login
+                navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = false    // hide register
+                navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = true      // display signout
+            }
+            else {
+                // No user signed in
+                navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = true        // display login
+                navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = true     // display register
+                navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = false     // hide signout
+            }
+
+            when (it.itemId) {
                 R.id.nav_login -> {
                     // onclick event
                     it.isChecked = true
@@ -56,7 +85,8 @@ class LandingActivity : AppCompatActivity() {
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    Toast.makeText(this.baseContext,"Create Listing Selected",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.baseContext, "Create Listing Selected", Toast.LENGTH_SHORT)
+                        .show()
                     drawerLayout?.closeDrawers()
                     true
                 }
@@ -64,7 +94,7 @@ class LandingActivity : AppCompatActivity() {
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    Toast.makeText(this.baseContext,"Help Selected", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.baseContext, "Help Selected", Toast.LENGTH_SHORT).show()
                     drawerLayout?.closeDrawers()
                     true
                 }
@@ -89,23 +119,77 @@ class LandingActivity : AppCompatActivity() {
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    Toast.makeText(this, "Sign Out Selected", Toast.LENGTH_SHORT).show()
+                    userLogout()
                     drawerLayout?.closeDrawers()
                     true
                 }
+
                 else -> false
             }
-
         }
+
+        bottomNavigationView?.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                // Some activities are commented cause they are not implemented yet
+                R.id.navBottom_article -> {
+
+                    val articleFragment = FragmentArticle.newInstance()
+                    openFragment(articleFragment)
+                    true
+                }
+                R.id.navBottom_search -> {
+
+                    val searchFragment = FragmentSearch.newInstance()
+                    openFragment(searchFragment)
+                    true
+                }
+                R.id.navBottom_home -> {
+
+                    val homeFragment = FragmentHome.newInstance()
+                    openFragment(homeFragment)
+                    true
+                }
+                R.id.navBottom_mail -> {
+
+                    val inboxFragment = FragmentInbox.newInstance()
+                    openFragment(inboxFragment)
+                    true
+                }
+                R.id.navBottom_profile -> {
+
+                    val homeFragment = FragmentProfile.newInstance()
+                    openFragment(homeFragment)
+                    true
+                    }
+                else -> false    // else case this should not occur
+            }
+        }
+
+        openFragment(FragmentHome.newInstance())
+        // END OF onCreate
+    }
+
+
+    // sign the user out and sends them to the home screen to reload the drawer
+    private fun userLogout() {
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, LandingActivity::class.java)
+        finish()
+        startActivity(intent)
     }
 
     // Makes it so the button to open the side menu works
-    @SuppressLint("WrongConstant")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            android.R.id.home -> drawerLayout?.openDrawer(Gravity.START)
+            android.R.id.home -> drawerLayout?.openDrawer(GravityCompat.START)
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun openFragment(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.container, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+    }
 }

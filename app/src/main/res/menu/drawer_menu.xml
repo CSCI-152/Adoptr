@@ -2,27 +2,46 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
 
+        <!-- Hide when Signed in -->
         <item
             android:id="@+id/nav_login"
-            android:title="@string/navDrawer_login" />
+            android:title="@string/navDrawer_login"
+            android:menuCategory="secondary"
+            android:visible="true" />
+
+        <!-- Hide when Signed in -->
         <item
             android:id="@+id/nav_register"
-            android:title="@string/navDrawer_register" />
+            android:title="@string/navDrawer_register"
+            android:menuCategory="secondary"
+            android:visible="true" />
+
         <item
             android:id="@+id/nav_createListing"
+            android:menuCategory="secondary"
             android:title="@string/navDrawer_createListing" />
+
         <item
             android:id="@+id/nav_help"
+            android:menuCategory="secondary"
             android:title="@string/navDrawer_help" />
+
         <item
             android:id="@+id/nav_support_ticket"
+            android:menuCategory="secondary"
             android:title="@string/navDrawer_support_ticket" />
+
         <item
             android:id="@+id/nav_contact"
+            android:menuCategory="secondary"
             android:title="@string/navDrawer_contact" />
+
+        <!-- Hide when Signed out -->
         <item
             android:id="@+id/nav_signout"
-            android:title="@string/navDrawer_signout" />
+            android:title="@string/navDrawer_signout"
+            android:menuCategory="secondary"
+            android:visible="false" />
 
     </group>
 </menu>

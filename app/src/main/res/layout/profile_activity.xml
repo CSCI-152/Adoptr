@@ -8,62 +8,59 @@ This makes the drawer button in the topleft
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LandingActivity"
+    tools:context=".UserProfileActivity"
     android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true">
 
-    <!-- Contents that should appear on the page should be in the ConstraintLayout tag -->
+    <!--
+    Contents that should appear on the page should be in the ConstraintLayout tag
+    -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/oldprofileChangePassButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@string/button_change_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
 
         <include
-            android:id="@+id/include2"
-            layout="@layout/toolbar_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/include"
+            layout="@layout/toolbar_layout" />
 
-        <!-- This creates the bottom navigation bar -->
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fitsSystemWindows="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toBottomOf="@+id/navBottom_menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include2">
-
-        </FrameLayout>
+        <!--
+        This creates the bottom navigation bar
+        -->
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navBottom_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
+            android:layout_alignParentBottom="true"
             android:background="?android:attr/windowBackground"
             app:itemIconTint="@color/nav_bottom_color"
             app:itemTextColor="@color/nav_bottom_color"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_menu" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:id="@+id/navigationView"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_menu">
-
-    </com.google.android.material.navigation.NavigationView>
+        app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

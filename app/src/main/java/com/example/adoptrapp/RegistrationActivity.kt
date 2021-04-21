@@ -115,26 +115,32 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         mAuth?.createUserWithEmailAndPassword(email, password)
-            ?.addOnCompleteListener(object: OnCompleteListener<AuthResult> {
-                override fun onComplete(p0: Task<AuthResult>) {
-                    if (p0.isSuccessful) {
-                        val user = ClassUser(fullName, email)
-                        // Listeners put errors in the log (Logcat)
-                        // the error numbers are temp to distinguish which failure was encountered
-                        db.collection("users")
-                                .document(FirebaseAuth.getInstance().currentUser.uid).set(user)
-                                .addOnSuccessListener {
-                                    Toast.makeText(this@RegistrationActivity, "Account successfully registered!", Toast.LENGTH_LONG).show()
-                                }
-                                .addOnFailureListener {
-                                    Toast.makeText(this@RegistrationActivity, "Account registration failed. ERROR: 01", Toast.LENGTH_LONG).show()
-                                }
-                    }
-                    else {
-                        Toast.makeText(this@RegistrationActivity, "Account registration failed. ERROR: 02", Toast.LENGTH_LONG).show()
-                    }
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = ClassUser(fullName, email)
+                    // Listeners put errors in the log (Logcat)
+                    // the error numbers are temp to distinguish which failure was encountered
+                    db.collection("users")
+                            .document(FirebaseAuth.getInstance().currentUser!!.uid).set(user)
+                            .addOnSuccessListener {
+                                Toast.makeText(this@RegistrationActivity,
+                                        "Account successfully registered!",
+                                        Toast.LENGTH_LONG
+                                ).show()
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(this@RegistrationActivity,
+                                        task.exception!!.message.toString(),
+                                        Toast.LENGTH_LONG
+                                ).show()
+                            }
+                } else {
+                    Toast.makeText(this@RegistrationActivity,
+                            task.exception!!.message.toString(),
+                            Toast.LENGTH_LONG
+                    ).show()
                 }
-            })
+            }
         return true
     }
 }
