@@ -13,11 +13,11 @@ class AdminActivity : AppCompatActivity() {
 
     }
 
-    fun view_report(view: View) {
+    fun view_report() {
         val intent = Intent(this, ViewReport::class.java)
         startActivity(intent)
     }
-    fun view_user(view: View) {
+    fun view_user() {
         val intent = Intent(this, ViewUser::class.java)
         startActivity(intent)
     }

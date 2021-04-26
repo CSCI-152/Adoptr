@@ -117,6 +117,8 @@ androidx/core/view/ViewCompat$NestedScrollType.class
 androidx/core/view/ViewCompat$ScrollAxis.class
 androidx/core/view/ViewCompat$ScrollIndicators.class
 androidx/core/widget/TextViewCompat$AutoSizeTextType.class
+androidx/exifinterface/media/ExifInterface$ExifStreamType.class
+androidx/exifinterface/media/ExifInterface$IfdType.class
 androidx/fragment/app/FragmentManagerKt.class
 androidx/fragment/app/FragmentStateManagerControl.class
 androidx/lifecycle/Lifecycle$1.class
@@ -161,6 +163,14 @@ androidx/viewpager/widget/ViewPager$DecorView.class
 androidx/viewpager2/widget/ViewPager2$OffscreenPageLimit.class
 androidx/viewpager2/widget/ViewPager2$Orientation.class
 androidx/viewpager2/widget/ViewPager2$ScrollState.class
+com/bumptech/glide/annotation/Excludes.class
+com/bumptech/glide/annotation/GlideExtension.class
+com/bumptech/glide/annotation/GlideModule.class
+com/bumptech/glide/annotation/GlideOption.class
+com/bumptech/glide/annotation/GlideType.class
+com/bumptech/glide/annotation/compiler/Index.class
+com/bumptech/glide/gifdecoder/GifDecoder$GifDecodeStatus.class
+com/bumptech/glide/util/Synthetic.class
 com/google/android/gms/auth/api/phone/SmsCodeAutofillClient$PermissionState.class
 com/google/android/gms/common/GoogleSignatureVerifier.class
 com/google/android/gms/common/SignInButton$ButtonSize.class
@@ -276,6 +286,7 @@ com/google/firebase/firestore/util/AsyncQueue.class
 com/google/firebase/firestore/util/Preconditions.class
 com/google/firebase/platforminfo/AutoValue_LibraryVersion.class
 com/google/firebase/platforminfo/LibraryVersion.class
+com/google/firebase/storage/StorageException$ErrorCode.class
 com/google/gson/annotations/Expose.class
 com/google/gson/annotations/JsonAdapter.class
 com/google/gson/annotations/SerializedName.class
@@ -484,6 +495,7 @@ kotlin/jvm/functions/Function6.class
 kotlin/jvm/functions/Function7.class
 kotlin/jvm/functions/Function8.class
 kotlin/jvm/functions/Function9.class
+kotlin/jvm/internal/DefaultConstructorMarker.class
 kotlin/jvm/internal/FunctionImpl.class
 kotlin/jvm/internal/markers/KMappedMarker.class
 kotlin/ranges/RangesKt__RangesKt.class
@@ -508,6 +520,14 @@ kotlin/text/StringsKt___StringsKt.class
 kotlin/time/ExperimentalTime.class
 kotlin/time/TimeSourceKt.class
 kotlin/time/TimeSourcesKt.class
+kotlinx/android/extensions/CacheImplementation$Companion.class
+kotlinx/android/extensions/CacheImplementation.class
+kotlinx/android/extensions/ContainerOptions.class
+kotlinx/android/parcel/IgnoredOnParcel.class
+kotlinx/android/parcel/Parcelize.class
+kotlinx/android/parcel/RawValue.class
+kotlinx/android/parcel/TypeParceler.class
+kotlinx/android/parcel/WriteWith.class
 kotlinx/coroutines/AbstractCoroutine.class
 kotlinx/coroutines/ChildHandle.class
 kotlinx/coroutines/ChildJob$DefaultImpls.class

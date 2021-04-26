@@ -72,11 +72,13 @@ class LandingActivity : AppCompatActivity(){
             val uid = Firebase.auth.currentUser?.uid
             var currentUserRole: String? = ""
             // Access the document assigned to the current user and allows them to grab the role
-            db.collection("users").document(uid).get()
-                .addOnSuccessListener { document ->
-                    // converts the grabbed docutment to ClassUser object class and takes the role field
-                    currentUserRole = document.toObject<ClassUser>()!!.role
-                }
+            if (uid != null) {
+                db.collection("users").document(uid).get()
+                    .addOnSuccessListener { document ->
+                        // converts the grabbed docutment to ClassUser object class and takes the role field
+                        currentUserRole = document.toObject<ClassUser>()!!.role
+                    }
+            }
             navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = currentUserRole == "admin"
             navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = currentUserRole == "center"
 
@@ -87,7 +89,7 @@ class LandingActivity : AppCompatActivity(){
             navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = true     // display register
             navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = false     // hide signout
             navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
-            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = false
+            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = true   //Toua's changed it for testing display. Reverse it back to false
         }
 
         navigationView?.setNavigationItemSelectedListener {
@@ -99,6 +101,7 @@ class LandingActivity : AppCompatActivity(){
                     // the toast is for testing purposes only
                     val intent = Intent(this, AdminActivity::class.java)
                     startActivity(intent)
+                    drawerLayout?.closeDrawers()
                     true
                 }
                 R.id.nav_login -> {
@@ -123,7 +126,7 @@ class LandingActivity : AppCompatActivity(){
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    val intent = Intent(this, CreatePostActivity::class.java)
+                    val intent = Intent(this, RecycleViewActivity::class.java)
                     startActivity(intent)
                     drawerLayout?.closeDrawers()
                     true
