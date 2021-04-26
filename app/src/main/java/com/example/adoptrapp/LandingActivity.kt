@@ -118,7 +118,8 @@ class LandingActivity : AppCompatActivity(){
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    Toast.makeText(this, "Contact Selected", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, ContactDevs::class.java)
+                    startActivity(intent)
                     drawerLayout?.closeDrawers()
                     true
                 }

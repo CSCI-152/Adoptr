@@ -6,4 +6,5 @@
     android:id="@+id/my_toolBar"
     android:theme="@style/Theme.AdoptrApp"
     android:background="?attr/colorPrimary"
+    android:fitsSystemWindows="true"
     />
