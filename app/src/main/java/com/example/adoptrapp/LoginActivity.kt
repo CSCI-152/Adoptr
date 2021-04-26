@@ -56,9 +56,10 @@ class LoginActivity : AppCompatActivity() {
 
                     if (!task.isSuccessful){
                         Toast.makeText(this@LoginActivity, "Login Failed.",Toast.LENGTH_LONG).show()
-                    }else{
-                        startActivity(Intent(this@LoginActivity,LandingActivity::class.java))
+                    }
+                    else {
                         finish()
+                        startActivity(Intent(this@LoginActivity,LandingActivity::class.java))
                     }
                 })
         })

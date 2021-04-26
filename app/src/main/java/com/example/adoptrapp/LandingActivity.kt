@@ -44,8 +44,6 @@ class LandingActivity : AppCompatActivity(){
         bottomNavigationView = findViewById(R.id.navBottom_menu)
 
         // setting the initial fragment
-
-
         setSupportActionBar(toolbar)
         val actionBar: ActionBar? = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -55,41 +53,12 @@ class LandingActivity : AppCompatActivity(){
         setupBottomNavigationView()
         bottomNavigationView?.selectedItemId = R.id.navBottom_home
 
-
         openFragment(FragmentHome.newInstance())
-        // END OF onCreate
-    }
+    } // END OF onCreate
 
     private fun setupNavigationView(){
 
         val db = FirebaseFirestore.getInstance()
-        if (Firebase.auth.currentUser != null) {
-            // User is signed in
-            navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = false       // hide login
-            navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = false    // hide register
-            navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = true      // display signout
-
-            val uid = Firebase.auth.currentUser?.uid
-            var currentUserRole: String? = ""
-            // Access the document assigned to the current user and allows them to grab the role
-            db.collection("users").document(uid).get()
-                .addOnSuccessListener { document ->
-                    // converts the grabbed docutment to ClassUser object class and takes the role field
-                    currentUserRole = document.toObject<ClassUser>()!!.role
-                }
-            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = currentUserRole == "admin"
-            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = currentUserRole == "center"
-
-        }
-        else {
-            // No user signed in
-            navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = true        // display login
-            navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = true     // display register
-            navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = false     // hide signout
-            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
-            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = false
-        }
-
         navigationView?.setNavigationItemSelectedListener {
             // need to load a different toolbar menu based on user log in status
             when (it.itemId) {
@@ -161,11 +130,38 @@ class LandingActivity : AppCompatActivity(){
                     drawerLayout?.closeDrawers()
                     true
                 }
-
                 else -> false
-            }
-        }
-    }
+            } // END WHEN CASE
+        } // END LISTENER CASE
+
+        // This needs to be loaded after the event listener
+        if (Firebase.auth.currentUser != null) {
+            // User is signed in
+            navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = false       // hide login
+            navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = false    // hide register
+            navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = true      // display signout
+
+            val uid = Firebase.auth.currentUser.uid
+            var currentUserRole: String? = ""
+            // Access the document assigned to the current user and allows them to grab the role
+            db.collection("users").document(uid).get()
+                .addOnSuccessListener { document ->
+                    // converts the grabbed docutment to ClassUser object class and takes the role field
+                    currentUserRole = document.toObject<ClassUser>()!!.role
+                }
+            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = currentUserRole == "admin"
+            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = currentUserRole == "center"
+
+        } // END IF CASE
+        else {
+            // No user signed in
+            navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = true        // display login
+            navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = true     // display register
+            navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = false     // hide signout
+            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
+            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = false
+        } // END ELSE CASE
+    } // END setupNavigationView FUNCTION
 
     private fun setupBottomNavigationView(){
         bottomNavigationView?.setOnNavigationItemSelectedListener {
@@ -202,9 +198,9 @@ class LandingActivity : AppCompatActivity(){
                     true
                 }
                 else -> false    // else case this should not occur
-            }
-        }
-    }
+            } // END WHEN CASE
+        } // END LISTENER CASE
+    } // END setupBottomNavigationView FUNCTION
 
     // sign the user out and sends them to the home screen to reload the drawer
     private fun userLogout() {
@@ -212,7 +208,7 @@ class LandingActivity : AppCompatActivity(){
         val intent = Intent(this, LandingActivity::class.java)
         finish()
         startActivity(intent)
-    }
+    } // END userLogout FUNCTION
 
     // Makes it so the button to open the side menu works
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -220,12 +216,12 @@ class LandingActivity : AppCompatActivity(){
             android.R.id.home -> drawerLayout?.openDrawer(GravityCompat.START)
         }
         return super.onOptionsItemSelected(item)
-    }
+    } // END onOptionsItemSelected FUNCTION
 
     private fun openFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-    }
-}
+    } // END openFragment FUNCTION
+} // END LandingActivity Class

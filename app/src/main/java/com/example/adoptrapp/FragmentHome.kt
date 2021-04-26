@@ -24,12 +24,8 @@ class FragmentHome: Fragment() {
 
         val view =  inflater.inflate(R.layout.fragment_home, container, false)
 
-        val toolbar = view.findViewById<Toolbar>(R.id.my_toolBar)
+        // Write the code here as you would with LandingActivity
 
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        val actionBar: ActionBar? = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar)
 
         return view
     }
