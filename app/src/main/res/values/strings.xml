@@ -38,9 +38,13 @@
     <string name="forgot_password_desc">Enter your account email below to send a forgot password request to it.</string>
     <string name="forgot_password_enter_email_here">Enter Email here</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="up_load_image">Upload Image</string>
+    <string name="postcreation_submit">Submit post</string>
 
     //admin buttons text
     <string name="view_report">View Reports</string>
     <string name="view_user">View Users</string>
+    <string name="description_of_pet">Description of pet</string>
+    <string name="post_title">Post Title</string>
 
 </resources>

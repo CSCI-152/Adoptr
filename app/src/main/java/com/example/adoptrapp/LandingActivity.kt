@@ -44,6 +44,8 @@ class LandingActivity : AppCompatActivity(){
         bottomNavigationView = findViewById(R.id.navBottom_menu)
 
         // setting the initial fragment
+
+
         setSupportActionBar(toolbar)
         val actionBar: ActionBar? = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -53,8 +55,10 @@ class LandingActivity : AppCompatActivity(){
         setupBottomNavigationView()
         bottomNavigationView?.selectedItemId = R.id.navBottom_home
 
+
         openFragment(FragmentHome.newInstance())
-    } // END OF onCreate
+        // END OF onCreate
+    }
 
     private fun setupNavigationView(){
 
@@ -68,6 +72,7 @@ class LandingActivity : AppCompatActivity(){
                     // the toast is for testing purposes only
                     val intent = Intent(this, AdminActivity::class.java)
                     startActivity(intent)
+                    drawerLayout?.closeDrawers()
                     true
                 }
                 R.id.nav_login -> {
@@ -92,7 +97,7 @@ class LandingActivity : AppCompatActivity(){
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    val intent = Intent(this, CreatePostActivity::class.java)
+                    val intent = Intent(this, RecycleViewActivity::class.java)
                     startActivity(intent)
                     drawerLayout?.closeDrawers()
                     true
@@ -131,6 +136,7 @@ class LandingActivity : AppCompatActivity(){
                     drawerLayout?.closeDrawers()
                     true
                 }
+
                 else -> false
             } // END WHEN CASE
         } // END LISTENER CASE
