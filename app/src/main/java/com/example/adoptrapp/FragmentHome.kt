@@ -24,7 +24,7 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
 
     private val firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var postList: List<PostModel> = ArrayList()
-    private val recycleViewAdapter : RecycleViewAdapter = RecycleViewAdapter(postList,this)
+    private val recycleViewAdapter : RecycleViewAdapterPost = RecycleViewAdapterPost(postList,this)
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

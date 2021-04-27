@@ -22,13 +22,13 @@ class CreatePostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create_post_activity)
 
-        val browse_button = findViewById<Button>(R.id.browse_button)
-        browse_button.setOnClickListener{
+        val browseButton = findViewById<Button>(R.id.browse_button)
+        browseButton.setOnClickListener{
             startFileChooser()
         }
 
-        val sumbitButton = findViewById<Button>(R.id.sumit_button)
-        browse_button.setOnClickListener{
+        val submitButton = findViewById<Button>(R.id.submit_button)
+        browseButton.setOnClickListener{
             uploadFile()
         }
     }

@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ListDisplayTemplateActivity"></activity>
+        <activity android:name=".CreateArticleActivity"></activity>
+        <activity android:name=".ListDisplayTemplateActivity" />
         <activity android:name=".RecycleViewActivity" />
         <activity android:name=".ViewUser" />
         <activity android:name=".CreatePostActivity" />

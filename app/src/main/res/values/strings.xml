@@ -46,5 +46,8 @@
     <string name="view_user">View Users</string>
     <string name="description_of_pet">Description of pet</string>
     <string name="post_title">Post Title</string>
+    <string name="article_title">Article Title</string>
+    <string name="article_description">Article Description</string>
+    <string name="create_article">Create article</string>
 
 </resources>
