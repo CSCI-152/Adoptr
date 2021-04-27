@@ -142,6 +142,7 @@ class LandingActivity : AppCompatActivity(){
         } // END LISTENER CASE
 
         // This needs to be loaded after the event listener
+        /*
         if (Firebase.auth.currentUser != null) {
             // User is signed in
             navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = false       // hide login
@@ -168,6 +169,7 @@ class LandingActivity : AppCompatActivity(){
             navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
             navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = false
         } // END ELSE CASE
+         */
     } // END setupNavigationView FUNCTION
 
     private fun setupBottomNavigationView(){

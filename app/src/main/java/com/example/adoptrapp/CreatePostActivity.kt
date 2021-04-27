@@ -27,7 +27,7 @@ class CreatePostActivity : AppCompatActivity() {
             startFileChooser()
         }
 
-        val sumit_button = findViewById<Button>(R.id.sumit_button)
+        val sumbitButton = findViewById<Button>(R.id.sumit_button)
         browse_button.setOnClickListener{
             uploadFile()
         }

@@ -1,19 +1,17 @@
 package com.example.adoptrapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.activity_recycle_view.*
 
-class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
+open class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
 
     private val firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var postList: List<PostModel> = ArrayList()
@@ -24,8 +22,10 @@ class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
         setContentView(R.layout.activity_recycle_view)
 
         loadData()
-        firestore_list.layoutManager = LinearLayoutManager(this)
-        firestore_list.adapter = recycleViewAdapter
+
+        val firestoreList = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.firestore_list)
+        firestoreList.layoutManager = LinearLayoutManager(this)
+        firestoreList.adapter = recycleViewAdapter
     }
 
     private fun loadData(){
@@ -41,7 +41,7 @@ class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
         }
     }
 
-    fun getPostList(): Task<QuerySnapshot>{
+    private fun getPostList(): Task<QuerySnapshot>{
         return firebaseFirestore
             .collection("Listings")
             //.orderBy("date", Query.Direction.DESCENDING)
