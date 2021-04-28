@@ -56,7 +56,7 @@ class FragmentProfile : Fragment() {
         if (Firebase.auth.currentUser != null) {
             // Initialize variables/values
             val db = FirebaseFirestore.getInstance() // make a connection to the database
-            val uid = Firebase.auth.currentUser.uid
+            val uid = Firebase.auth.currentUser!!.uid
             // Fetch the petMarks list from db
             val docRef = db.collection("users").document(uid)
             docRef.get(Source.SERVER)
@@ -74,7 +74,7 @@ class FragmentProfile : Fragment() {
 
                         } // END if CASE
                         else {
-                            Toast.makeText(
+                            makeText(
                                 this.activity,
                                 "Acquired list is either null or empty",
                                 Toast.LENGTH_LONG
@@ -108,8 +108,8 @@ class FragmentProfile : Fragment() {
         if (Firebase.auth.currentUser != null) {
             // The user is logged in
             val db = FirebaseFirestore.getInstance() // make a connection to the database
-            val uid = Firebase.auth.currentUser.uid
-            val data = hashMapOf( "listingID" to listingID )
+            val uid = Firebase.auth.currentUser!!.uid
+            // val data = hashMapOf( "listingID" to listingID )
             db.collection("users").document(uid)
                 .update("petMarks", FieldValue.arrayUnion(listingID)) //add its to the petMark array
                 .addOnSuccessListener {

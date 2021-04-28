@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_with_image.view.*
 
-class RecycleViewAdapter (var postListItem: List<PostModel>, val clickListener: (PostModel) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class RecycleViewAdapterPost (var postListItem: List<PostModel>, val clickListener: (PostModel) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     class ImageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(postModel: PostModel, clickListener: (PostModel) -> Unit){

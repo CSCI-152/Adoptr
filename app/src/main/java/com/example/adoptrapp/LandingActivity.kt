@@ -1,10 +1,8 @@
 package com.example.adoptrapp
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -17,13 +15,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.NonCancellable.children
 
 class LandingActivity : AppCompatActivity(){
 
@@ -102,6 +97,14 @@ class LandingActivity : AppCompatActivity(){
                     drawerLayout?.closeDrawers()
                     true
                 }
+                R.id.nav_createArticle -> {
+                    // onclick event
+                    it.isChecked = true
+                    val intent = Intent(this, CreateArticleActivity::class.java)
+                    startActivity(intent)
+                    drawerLayout?.closeDrawers()
+                    true
+                }
                 R.id.nav_help -> {
                     // onclick event
                     it.isChecked = true
@@ -142,34 +145,54 @@ class LandingActivity : AppCompatActivity(){
         } // END LISTENER CASE
 
         // This needs to be loaded after the event listener
-        /*
+
         if (Firebase.auth.currentUser != null) {
             // User is signed in
             navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = false       // hide login
             navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = false    // hide register
             navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = true      // display signout
 
-            val uid = Firebase.auth.currentUser.uid
+            val uid = Firebase.auth.currentUser!!.uid
             var currentUserRole: String? = ""
             // Access the document assigned to the current user and allows them to grab the role
-            db.collection("users").document(uid).get()
+            db.collection("users").document(uid).get(Source.SERVER)
                 .addOnSuccessListener { document ->
-                    // converts the grabbed docutment to ClassUser object class and takes the role field
+                    // converts the grabbed document to ClassUser object class and takes the role field
                     currentUserRole = document.toObject<ClassUser>()!!.role
-                }
-            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = currentUserRole == "admin"
-            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = currentUserRole == "center"
+                    when (currentUserRole) {
+                        "admin" -> {
+                            // things only the admin should see should go into here
+                            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = true
+                            // admins should see createPost/Article for debugging
+                            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = true
+                            navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = true
+                        }
+                        "center" -> {
+                            // things only the center should see should go into here
+                            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
+                            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = true
+                            navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = true
 
+                        }
+                        else -> {
+                            // things only the user should NOT see should go into here
+                            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
+                            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = false
+                            navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = false
+                        }
+                }
+            } // END when CASE
         } // END IF CASE
         else {
             // No user signed in
             navigationView?.menu?.findItem(R.id.nav_login)?.isVisible = true        // display login
             navigationView?.menu?.findItem(R.id.nav_register)?.isVisible = true     // display register
             navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = false     // hide signout
-            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
-            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = false
+            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false       // hide admin
+            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = false  // hide createPost
+            navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = false  // hide createArticle
         } // END ELSE CASE
-         */
+
     } // END setupNavigationView FUNCTION
 
     private fun setupBottomNavigationView(){

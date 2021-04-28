@@ -28,7 +28,7 @@ class ListDisplayTemplateActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { documentList ->
                 for (document in documentList) {
-                    val postModel = document.toObject(PostModel::class.java)
+                    val postModel = document.toObject(ClassArticle::class.java)
                     if(intentValue == postModel.title){
                         displayTemplateTitle.text = postModel.title.toString()
                     }

@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
-import kotlinx.android.synthetic.main.activity_recycle_view.*
 
 open class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
 
     private val firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var postList: List<PostModel> = ArrayList()
-    private val recycleViewAdapter : RecycleViewAdapter = RecycleViewAdapter(postList,this)
+    private val recycleViewAdapter : RecycleViewAdapterPost = RecycleViewAdapterPost(postList,this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
