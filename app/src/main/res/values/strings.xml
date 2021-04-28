@@ -46,6 +46,43 @@
     <string name="view_user">View Users</string>
     <string name="description_of_pet">Description of pet</string>
     <string name="post_title">Post Title</string>
+
+    <string name="select_tags">Select Tags</string>
+    <string name="gender">Gender</string>
+    <string name="age">Age</string>
+    <string name="animal">Animal</string>
+
+    //animal tags
+    <string-array name="tag1">
+        <item>dog</item>
+        <item>cat</item>
+        <item>fish</item>
+        <item>goat</item>
+        <item>horse</item>
+        <item>mouse</item>
+        <item>rabbit</item>
+        <item>pig</item>
+        <item>snake</item>
+        <item>rat</item>
+        <item>turtle</item>
+        <item>tortoise</item>
+        <item>other</item>
+    </string-array>
+
+    //age tags
+    <string-array name="tag2">
+        <item>0-3</item>
+        <item>4-7</item>
+        <item>8-12</item>
+        <item>12+</item>
+    </string-array>
+
+    //gender tags
+    <string-array name="tag3">
+        <item>female</item>
+        <item>male</item>
+    </string-array>
+
     <string name="article_title">Article Title</string>
     <string name="article_description">Article Description</string>
     <string name="create_article">Create article</string>

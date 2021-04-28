@@ -1,5 +1,6 @@
 package com.example.adoptrapp
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
@@ -8,16 +9,21 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Button
 import android.widget.Toast
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.create_post_activity.*
+import kotlinx.android.synthetic.main.create_post_activity.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CreatePostActivity : AppCompatActivity() {
-    lateinit var filepath : Uri
 
+    lateinit var filepath : Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create_post_activity)
@@ -27,6 +33,7 @@ class CreatePostActivity : AppCompatActivity() {
             startFileChooser()
         }
 
+
         val submitButton = findViewById<Button>(R.id.submit_button)
         browseButton.setOnClickListener{
             uploadFile()
@@ -34,50 +41,64 @@ class CreatePostActivity : AppCompatActivity() {
     }
 
     private fun startFileChooser() {
-        var i = Intent()
-        i.setType("image/*")
-        i.setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(Intent.createChooser(i, "Choose an image"), 111)
+        var intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Choose an image"), 1)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 111 && resultCode == RESULT_OK && data != null){
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null){
             filepath = data.data!!
             var bitmap = MediaStore.Images.Media.getBitmap(contentResolver,filepath)
+            imageView.setImageBitmap(bitmap)
         }
     }
 
     private fun uploadFile(){
 
-        val db = FirebaseFirestore.getInstance()
         val uid = Firebase.auth.currentUser?.uid
 
-        var currentUserName: String? = ""
-        // Access the document assigned to the current user and allows them to grab the role
-        if (uid != null) {
-            db.collection("users").document(uid).get()
-                .addOnSuccessListener { document ->
-                    // converts the grabbed docutment to ClassUser object class and takes the role field
-                    currentUserName = document.toObject<ClassUser>()!!.fullName
-                }
-        }
+        var title = create_post_title.text.toString().trim() //createpost titile
+        var description = editText.text.toString().trim() //createpost description
+        var animaltag = spinner.selectedItem.toString().trim()
+        var agetag = spinner2.selectedItem.toString().trim()
+        var gendertag = spinner3.selectedItem.toString().trim()
 
-        if(filepath != null){
+        if(title.isNotEmpty() && description.isNotEmpty() && filepath != null){
             var pd = ProgressDialog(this)
             pd.setTitle("Uploading")
             pd.show()
 
-            var imageRef: StorageReference = FirebaseStorage.getInstance().reference.child("image/image.jpg")
+            var time = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Date())
+            var imgID = uid+time
+
+            //insert image happen below here
+            var imageRef: StorageReference = FirebaseStorage.getInstance().reference.child("image/$imgID")
             imageRef.putFile(filepath)
                 .addOnSuccessListener {
-                    pd.dismiss()
-                    Toast.makeText(applicationContext,"File uploaded", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,"File uploaded", Toast.LENGTH_SHORT).show()
                 }
                 .addOnCanceledListener {
                     pd.dismiss()
                     Toast.makeText(applicationContext,"Upload failed", Toast.LENGTH_LONG).show()
                 }
+            pd.dismiss()
+
+            //insert title and descript of pet happen below here
+            var createPost = FirebaseFirestore.getInstance()
+            val postCreation = PostModel(uid, title, description, time, imgID, animaltag, agetag, gendertag)
+
+            createPost.collection("Listings")
+                .add(postCreation)
+                .addOnSuccessListener {
+                    Toast.makeText(applicationContext,"Post inserted.", Toast.LENGTH_LONG).show()
+                }
+            finish()
+        }
+        else{
+            Toast.makeText(applicationContext,"All fields are require", Toast.LENGTH_LONG).show()
         }
     }
 }
