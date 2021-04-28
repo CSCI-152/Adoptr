@@ -44,7 +44,7 @@ open class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
     private fun getPostList(): Task<QuerySnapshot>{
         return firebaseFirestore
             .collection("Listings")
-            //.orderBy("date", Query.Direction.DESCENDING)
+            .orderBy("date", Query.Direction.DESCENDING)
             .get()
     }
 
