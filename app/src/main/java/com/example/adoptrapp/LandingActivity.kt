@@ -92,7 +92,7 @@ class LandingActivity : AppCompatActivity(){
                     // onclick event
                     it.isChecked = true
                     // the toast is for testing purposes only
-                    val intent = Intent(this, RecycleViewActivity::class.java)
+                    val intent = Intent(this, CreatePostActivity::class.java)
                     startActivity(intent)
                     drawerLayout?.closeDrawers()
                     true

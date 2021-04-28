@@ -14,12 +14,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 class SupportTicketActivity : AppCompatActivity(), View.OnClickListener {
 
     // private var backButton: Button? = null // need to add a button to exit this activity
-    private var submitButton: Button? = null
 
     private val db = FirebaseFirestore.getInstance()
-    private var spinner1: Spinner? = null
-    private var spinner2: Spinner? = null
-    private var desc: String? = null
+
+    private lateinit var submitButton: Button
+    private lateinit var spinner1: Spinner
+    private lateinit var spinner2: Spinner
+    private lateinit var desc: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class SupportTicketActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.support_ticket_activity)
 
         submitButton = findViewById(R.id.submitTicketButton)
-        submitButton!!.setOnClickListener(this)
+        submitButton.setOnClickListener(this)
 
         spinner1 = findViewById(R.id.spinnerMenu1)
         spinner2 = findViewById(R.id.spinnerMenu2)
@@ -44,8 +45,8 @@ class SupportTicketActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun submitTicket(): Boolean {
-        val spinnerEntry1 = spinner1?.selectedItem.toString().trim()
-        val spinnerEntry2 = spinner2?.selectedItem.toString().trim()
+        val spinnerEntry1 = spinner1.selectedItem.toString().trim()
+        val spinnerEntry2 = spinner2.selectedItem.toString().trim()
         val descView = findViewById<EditText>(R.id.editTextDescriptionBox)
 
         val topic = spinnerEntry1.trim()

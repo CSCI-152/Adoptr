@@ -1,5 +1,6 @@
 package com.example.adoptrapp
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
@@ -9,15 +10,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Button
 import android.widget.Toast
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.create_post_activity.*
-import kotlinx.android.synthetic.main.create_post_activity.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,13 +33,13 @@ class CreatePostActivity : AppCompatActivity() {
 
 
         val submitButton = findViewById<Button>(R.id.submit_button)
-        browseButton.setOnClickListener{
+        submitButton.setOnClickListener{
             uploadFile()
         }
     }
 
     private fun startFileChooser() {
-        var intent = Intent()
+        val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Choose an image"), 1)
@@ -51,31 +49,32 @@ class CreatePostActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null){
             filepath = data.data!!
-            var bitmap = MediaStore.Images.Media.getBitmap(contentResolver,filepath)
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,filepath)
             imageView.setImageBitmap(bitmap)
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun uploadFile(){
 
         val uid = Firebase.auth.currentUser?.uid
 
-        var title = create_post_title.text.toString().trim() //createpost titile
-        var description = editText.text.toString().trim() //createpost description
-        var animaltag = spinner.selectedItem.toString().trim()
-        var agetag = spinner2.selectedItem.toString().trim()
-        var gendertag = spinner3.selectedItem.toString().trim()
+        val title = create_post_title.text.toString().trim() //createpost titile
+        val description = editText.text.toString().trim() //createpost description
+        val animalTag = spinner.selectedItem.toString().trim()
+        val ageTag = spinner2.selectedItem.toString().trim()
+        val genderTag = spinner3.selectedItem.toString().trim()
 
         if(title.isNotEmpty() && description.isNotEmpty() && filepath != null){
-            var pd = ProgressDialog(this)
+            val pd = ProgressDialog(this)
             pd.setTitle("Uploading")
             pd.show()
 
-            var time = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Date())
-            var imgID = uid+time
+            val time = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Date())
+            val imgID = uid+time
 
             //insert image happen below here
-            var imageRef: StorageReference = FirebaseStorage.getInstance().reference.child("image/$imgID")
+            val imageRef: StorageReference = FirebaseStorage.getInstance().reference.child("image/$imgID")
             imageRef.putFile(filepath)
                 .addOnSuccessListener {
                     Toast.makeText(applicationContext,"File uploaded", Toast.LENGTH_SHORT).show()
@@ -87,8 +86,8 @@ class CreatePostActivity : AppCompatActivity() {
             pd.dismiss()
 
             //insert title and descript of pet happen below here
-            var createPost = FirebaseFirestore.getInstance()
-            val postCreation = PostModel(uid, title, description, time, imgID, animaltag, agetag, gendertag)
+            val createPost = FirebaseFirestore.getInstance()
+            val postCreation = PostModel(uid, title, description, time, imgID, animalTag, ageTag, genderTag)
 
             createPost.collection("Listings")
                 .add(postCreation)

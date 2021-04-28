@@ -31,9 +31,15 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
                               savedInstanceState: Bundle?): View? {
 
         val view =  inflater.inflate(R.layout.fragment_home, container, false)
-
         // Write the code here as you would with LandingActivity
-        loadData()
+
+        if (arguments == null){
+            loadData(0)
+        }
+        else {
+            loadData(1)
+        }
+
         val firestoreList = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.firestore_list)
         firestoreList.layoutManager = LinearLayoutManager(this.context)
         firestoreList.adapter = recycleViewAdapter
@@ -41,18 +47,40 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
         return view
     }
 
-    private fun loadData(){
-        getPostList().addOnCompleteListener{
-            if(it.isSuccessful){
-                postList = it.result!!.toObjects(PostModel::class.java)
-                recycleViewAdapter.postListItem = postList
-                recycleViewAdapter.notifyDataSetChanged()
+    private fun loadData(control: Int){
+        when (control){
+            1 -> {
+                // if control = 1 use search load
+                val tag1 = requireArguments().getString("tag1").toString().trim()
+                val tag2 = requireArguments().getString("tag2").toString().trim()
+                val tag3 = requireArguments().getString("tag3").toString().trim()
+
+                getSearchList(tag1, tag2, tag3).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        postList = it.result!!.toObjects(PostModel::class.java)
+                        recycleViewAdapter.postListItem = postList
+                        recycleViewAdapter.notifyDataSetChanged()
+                    }
+                    else{
+                        Toast.makeText(this.context,"Failed to retrieve data", Toast.LENGTH_LONG).show()
+                    }
+                }
             }
-            else{
-                Toast.makeText(this.context,"Failed to retrieve data", Toast.LENGTH_LONG).show()
+            else -> {
+                // otherwise use default load
+                getPostList().addOnCompleteListener{
+                    if(it.isSuccessful){
+                        postList = it.result!!.toObjects(PostModel::class.java)
+                        recycleViewAdapter.postListItem = postList
+                        recycleViewAdapter.notifyDataSetChanged()
+                    }
+                    else{
+                        Toast.makeText(this.context,"Failed to retrieve data", Toast.LENGTH_LONG).show()
+                    }
+                }
             }
         }
-    }
+    } // END loadData FUNC
 
     private fun getPostList(): Task<QuerySnapshot> {
         return firebaseFirestore
@@ -61,10 +89,16 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
             .get()
     }
 
+    private fun getSearchList(tag1: String, tag2: String, tag3: String) : Task<QuerySnapshot> {
+        return firebaseFirestore
+            .collection("Listings")
+            .whereEqualTo("tag1", tag1).whereEqualTo("tag2", tag2).whereEqualTo("tag3", tag3).get()
+    }
+
     //passing values onclick
     override fun invoke(postModel: PostModel) {
-        val title = postModel.title.toString()
-        var bundle = bundleOf(
+        val title = postModel.title
+        val bundle = bundleOf(
             "title" to title
         )
         val i = Intent(this.context, ListDisplayTemplateActivity::class.java)
