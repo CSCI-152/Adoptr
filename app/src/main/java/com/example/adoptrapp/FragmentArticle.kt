@@ -32,7 +32,7 @@ class FragmentArticle: Fragment(), (ClassArticle) -> Unit {
 
 
         loadDataArticles()
-        val firestoreList = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.firestore_list)
+        val firestoreList = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.firestore_list_article)
         firestoreList.layoutManager = LinearLayoutManager(this.context)
         firestoreList.adapter = recycleViewAdapter
 

@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
@@ -154,26 +155,33 @@ class LandingActivity : AppCompatActivity(){
             val uid = Firebase.auth.currentUser!!.uid
             var currentUserRole: String? = ""
             // Access the document assigned to the current user and allows them to grab the role
-            db.collection("users").document(uid).get()
+            db.collection("users").document(uid).get(Source.SERVER)
                 .addOnSuccessListener { document ->
                     // converts the grabbed document to ClassUser object class and takes the role field
                     currentUserRole = document.toObject<ClassUser>()!!.role
+                    when (currentUserRole) {
+                        "admin" -> {
+                            // things only the admin should see should go into here
+                            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = true
+                            // admins should see createPost/Article for debugging
+                            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = true
+                            navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = true
+                        }
+                        "center" -> {
+                            // things only the center should see should go into here
+                            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
+                            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = true
+                            navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = true
+
+                        }
+                        else -> {
+                            // things only the user should NOT see should go into here
+                            navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = false
+                            navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = false
+                            navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = false
+                        }
                 }
-            if (currentUserRole == "admin"){
-                // things only the admin should see should go into here
-                navigationView?.menu?.findItem(R.id.nav_admin)?.isVisible = true
-                // admins shoudl see createPost/Article for debugging
-                navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = true
-                navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = true
-            }
-            else if (currentUserRole == "center") {
-                // things only the center should see should go into here
-                navigationView?.menu?.findItem(R.id.nav_createPost)?.isVisible = true
-                navigationView?.menu?.findItem(R.id.nav_createArticle)?.isVisible = true
-
-            }
-
-
+            } // END when CASE
         } // END IF CASE
         else {
             // No user signed in

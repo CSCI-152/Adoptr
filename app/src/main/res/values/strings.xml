@@ -50,4 +50,21 @@
     <string name="article_description">Article Description</string>
     <string name="create_article">Create article</string>
 
+    <!-- Spinner1 on the support ticket page-->
+    <string-array name="supportSpinner1">
+        <item>App</item>
+        <item>Shelter</item>
+        <item>User</item>
+        <item>Account</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Spinner2 on the support ticket page-->
+    <string-array name="supportSpinner2">
+        <item>Bug</item>
+        <item>Interaction</item>
+        <item>Harassment</item>
+        <item>General Support</item>
+        <item>Other</item>
+    </string-array>
 </resources>

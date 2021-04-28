@@ -18,6 +18,12 @@ class FragmentSearch: Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        // code that needs to be run when the fragment starts up goes here
+
+
+
+
+        return view
     }
 }
