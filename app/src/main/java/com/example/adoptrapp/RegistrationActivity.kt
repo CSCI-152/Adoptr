@@ -38,6 +38,8 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
         editTextEmail = findViewById(R.id.enterEmail)
         editTextPassword = findViewById(R.id.enterPassword)
         editTextConfirmPassword = findViewById(R.id.confirmPassword)
+
+
     }
 
     override fun onClick(v: View?) {
@@ -47,10 +49,7 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.registerAccount -> {
-                if(registerAccount()) {
-                    finish()
-                    startActivity(Intent(this@RegistrationActivity,LandingActivity::class.java))
-                }
+                registerAccount()
             }
         }
     }
@@ -58,7 +57,7 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
     // returns a Boolean to use the if statement in the onClick override
     // if true it allows it to finish the activity
     // otherwise it stays in the register (this) activity
-    private fun registerAccount(): Boolean {
+    private fun registerAccount() {
         val fullName = editTextFullName?.text.toString().trim()
         val email = editTextEmail?.text.toString().trim()
         val password = editTextPassword?.text.toString().trim()
@@ -67,76 +66,95 @@ class RegistrationActivity : AppCompatActivity(), View.OnClickListener {
         if (fullName.isEmpty()){
             // Checks if the email box is filled out
             editTextFullName?.error = "An email is required."
-            return false
+            return
         }
 
         if (email.isEmpty()){
             // Checks if the email box is filled out
             editTextEmail?.error = "An email is required."
-            return false
+            return
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             // Checks if the email has a valid format
             editTextEmail?.error = "Please provide a valid email."
             editTextEmail?.requestFocus()
-            return false
+            return
         }
 
         if (password.isEmpty()){
             // Checks if the password box is filled out
             editTextPassword?.error = "A password is required."
             editTextPassword?.requestFocus()
-            return false
+            return
         }
         if (confirmPassword.isEmpty()){
             // Checks if the confirm password box is filled out
             editTextConfirmPassword?.error = "Please confirm your password."
             editTextConfirmPassword?.requestFocus()
-            return false
+            return
         }
 
         if (password != confirmPassword){
             // checks if the passwords match
             editTextConfirmPassword?.error = "Passwords do not match."
             editTextConfirmPassword?.requestFocus()
-            return false
+            return
         }
 
         if (password.length < 6){
             // Checks if the password is at least 6 characters long
             editTextPassword?.error = "Password must be at least 6 characters long"
             editTextPassword?.requestFocus()
-            return false
+            return
         }
 
         mAuth?.createUserWithEmailAndPassword(email, password)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val user = ClassUser(fullName, email)
+                    val uid = FirebaseAuth.getInstance().currentUser!!.uid
+                    val user = ClassUser(
+                        id = uid,
+                        fullName = fullName,
+                        email = email
+                    )
                     // Listeners put errors in the log (Logcat)
                     // the error numbers are temp to distinguish which failure was encountered
-                    db.collection("users")
-                            .document(FirebaseAuth.getInstance().currentUser!!.uid).set(user)
-                            .addOnSuccessListener {
+                    db.collection("users").document(uid).set(user)
+                        .addOnCompleteListener { task2 ->
+                            if (task2.isSuccessful) {
                                 Toast.makeText(this@RegistrationActivity,
-                                        "Account successfully registered!",
-                                        Toast.LENGTH_LONG
+                                    "Account successfully registered!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                // returns the user to the main activity once the account is successfully registered
+                                // this is so the sidebar gets updated
+                                finish()
+                                val intent = Intent(this, LandingActivity::class.java)
+                                startActivity(intent)
+                            }
+                            else {
+                                Toast.makeText(this@RegistrationActivity,
+                                    task2.exception!!.message.toString(),
+                                    Toast.LENGTH_LONG
                                 ).show()
                             }
-                            .addOnFailureListener {
-                                Toast.makeText(this@RegistrationActivity,
-                                        task.exception!!.message.toString(),
-                                        Toast.LENGTH_LONG
-                                ).show()
-                            }
-                } else {
+                        } // END onCompleteListener
+                } // END if CASE
+                else {
                     Toast.makeText(this@RegistrationActivity,
                             task.exception!!.message.toString(),
                             Toast.LENGTH_LONG
                     ).show()
-                }
+                } // END else CASE
             }
-        return true
+        return
     }
+
+    override fun onBackPressed() {
+            finish()
+            val intent = Intent(this, LandingActivity::class.java)
+            startActivity(intent)
+        }
 }
+

@@ -119,18 +119,26 @@ class SupportTicketActivity : AppCompatActivity(), View.OnClickListener {
 
         // highest priority should be 2
         val sumPriority = priorityOfTopic + priorityOfReason
+        val newDocRef = db.collection("supportTickets").document()
         // SEND THE DATA TO FIRESTORE
-        val data = ClassTicket(topic, reason, desc, sumPriority)
+        val data = ClassTicket(
+            id = newDocRef.id,
+            topic = topic,
+            reason = reason,
+            desc = desc,
+            priority = sumPriority
+        )
         // add() makes a auto generated id
-        db.collection("supportTickets")
-            .add(data)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+        newDocRef
+            .set(data)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "DocumentSnapshot written with ID: ${newDocRef.id}")
+                }
+                else {
+                    Log.w(TAG, "Error adding document", task.exception)
+                }
             }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
-
         // Toast to show this function works
         Toast.makeText(this.baseContext,"Ticket Submitted", Toast.LENGTH_SHORT).show()
         return true

@@ -55,7 +55,7 @@ class LandingActivity : AppCompatActivity(){
         // END OF onCreate
     }
 
-    private fun setupNavigationView(){
+    private fun setupNavigationView() {
 
         val db = FirebaseFirestore.getInstance()
         navigationView?.setNavigationItemSelectedListener {
@@ -85,7 +85,9 @@ class LandingActivity : AppCompatActivity(){
                     // the toast is for testing purposes only
                     val intent = Intent(this, RegistrationActivity::class.java)
                     startActivity(intent)
+                    finish()
                     drawerLayout?.closeDrawers()
+                    setupNavigationView()
                     true
                 }
                 R.id.nav_createPost -> {
@@ -145,7 +147,7 @@ class LandingActivity : AppCompatActivity(){
             navigationView?.menu?.findItem(R.id.nav_signout)?.isVisible = true      // display signout
 
             val uid = Firebase.auth.currentUser!!.uid
-            var currentUserRole: String? = ""
+            var currentUserRole: String?
             // Access the document assigned to the current user and allows them to grab the role
             db.collection("users").document(uid).get(Source.SERVER)
                 .addOnSuccessListener { document ->

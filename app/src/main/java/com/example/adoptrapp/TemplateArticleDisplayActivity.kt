@@ -47,8 +47,6 @@ class TemplateArticleDisplayActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             finish()
         }
-
-
     } // END onCreate
 }
 
