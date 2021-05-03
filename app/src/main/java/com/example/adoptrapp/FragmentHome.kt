@@ -97,9 +97,11 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
 
     //passing values onclick
     override fun invoke(postModel: PostModel) {
-        val title = postModel.title
-        val bundle = bundleOf(
-            "title" to title
+        var bundle = bundleOf(
+            "title" to postModel.title,
+            "author" to postModel.author,
+            "url" to postModel.url,
+            "desc" to postModel.description
         )
         val i = Intent(this.context, TemplateListDisplayActivity::class.java)
         i.putExtras(bundle)

@@ -72,42 +72,40 @@ class CreatePostActivity : AppCompatActivity() {
 
             val time = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Date())
             val imgID = uid+time
+            var imgURL: String? =""
+            var postCreation: PostModel
+
+            val createPost = FirebaseFirestore.getInstance()
+            val newDocRef = createPost.collection("Listings").document()
 
             //insert image happen below here
             val imageRef: StorageReference = FirebaseStorage.getInstance().reference.child("image/$imgID")
             imageRef.putFile(filepath)
                 .addOnSuccessListener {
                     Toast.makeText(applicationContext,"File uploaded", Toast.LENGTH_SHORT).show()
-                }
-                .addOnCanceledListener {
-                    pd.dismiss()
-                    Toast.makeText(applicationContext,"Upload failed", Toast.LENGTH_LONG).show()
-                }
-            pd.dismiss()
+                    imageRef.downloadUrl.addOnSuccessListener {
+                        imgURL = it.toString()
+                        postCreation = PostModel(
+                            id = newDocRef.id,
+                            author = uid,
+                            title = title,
+                            description = description,
+                            date = time,
+                            image =imgID,
+                            url = imgURL,
+                            tag1 = animalTag,
+                            tag2 = ageTag,
+                            tag3 = genderTag
+                        )
+                        pd.dismiss()
 
-            //insert title and description of pet happen below here
-            val createPost = FirebaseFirestore.getInstance()
-            val newDocRef = createPost.collection("Listings").document()
-            newDocRef.id
-
-            val postCreation = PostModel(
-                id = newDocRef.id,          // stores the id of the document as a field
-                author = uid,               // current user as author of document
-                title = title,              // storing general data about the listing
-                description = description,
-                date = time,
-                image = imgID,
-                tag1 = animalTag,
-                tag2 = ageTag,
-                tag3 = genderTag
-            )
             newDocRef.set(postCreation)
                 .addOnSuccessListener {
                     Toast.makeText(applicationContext,"Post inserted.", Toast.LENGTH_LONG).show()
                 }
             finish()
         }
-        else{
+        else {
             Toast.makeText(applicationContext,"All fields are require", Toast.LENGTH_LONG).show()
         }
     }

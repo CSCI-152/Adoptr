@@ -50,12 +50,15 @@ open class RecycleViewActivityPost : AppCompatActivity(), (PostModel) -> Unit {
 
     //passing values onclick
     override fun invoke(postModel: PostModel) {
-        val title = postModel.title.toString()
-        val bundle = bundleOf(
-            "title" to title
+        //
+        var bundle = bundleOf(
+            "title" to postModel.title,
+            "author" to postModel.author,
+            "url" to postModel.url
         )
         val i = Intent(this, TemplateListDisplayActivity::class.java)
         i.putExtras(bundle)
+        finish()
         startActivity(i)
     }
 }

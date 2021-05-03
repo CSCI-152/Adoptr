@@ -1,9 +1,10 @@
 package com.example.adoptrapp
 
 import android.content.Intent
-import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
 
 class AdminActivity : AppCompatActivity() {
 
@@ -15,6 +16,7 @@ class AdminActivity : AppCompatActivity() {
         userButton.setOnClickListener{
             viewUser()
         }
+
 
         val reportButton = findViewById<Button>(R.id.view_report)
         reportButton.setOnClickListener{
