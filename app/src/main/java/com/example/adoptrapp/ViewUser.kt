@@ -44,13 +44,17 @@ class ViewUser : AppCompatActivity(), (ViewUserModel) -> Unit {
         return firebaseFirestore
             .collection("users")
             .get()
-            .addOnCompleteListener {
+    }
 
-                val result: StringBuffer = StringBuffer()
-                for (document in it.result!!){
-                    result.append(document.data.getValue("role")).append("\n")
-                }
-                displayResult2.setText(result)
-            }
+    override fun invoke(p1: ViewUserModel) {
+        val bundle = bundleOf(
+            "email" to p1.email,
+            "fullName" to p1.fullName,
+            "role" to p1.role
+        )
+        val i = Intent(this, ViewUserDisplayTemplate::class.java)
+        i.putExtras(bundle)
+        finish()
+        startActivity(i)
     }
 }

@@ -65,24 +65,25 @@ class CreatePostActivity : AppCompatActivity() {
         val ageTag = spinner2.selectedItem.toString().trim()
         val genderTag = spinner3.selectedItem.toString().trim()
 
-        if(title.isNotEmpty() && description.isNotEmpty() && filepath != null){
+        if(title.isNotEmpty() && description.isNotEmpty() && filepath != null) {
             val pd = ProgressDialog(this)
             pd.setTitle("Uploading")
             pd.show()
 
             val time = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Date())
-            val imgID = uid+time
-            var imgURL: String? =""
+            val imgID = uid + time
+            var imgURL: String? = ""
             var postCreation: PostModel
 
             val createPost = FirebaseFirestore.getInstance()
             val newDocRef = createPost.collection("Listings").document()
 
             //insert image happen below here
-            val imageRef: StorageReference = FirebaseStorage.getInstance().reference.child("image/$imgID")
+            val imageRef: StorageReference =
+                FirebaseStorage.getInstance().reference.child("image/$imgID")
             imageRef.putFile(filepath)
                 .addOnSuccessListener {
-                    Toast.makeText(applicationContext,"File uploaded", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "File uploaded", Toast.LENGTH_SHORT).show()
                     imageRef.downloadUrl.addOnSuccessListener {
                         imgURL = it.toString()
                         postCreation = PostModel(
@@ -91,7 +92,7 @@ class CreatePostActivity : AppCompatActivity() {
                             title = title,
                             description = description,
                             date = time,
-                            image =imgID,
+                            image = imgID,
                             url = imgURL,
                             tag1 = animalTag,
                             tag2 = ageTag,
@@ -99,11 +100,17 @@ class CreatePostActivity : AppCompatActivity() {
                         )
                         pd.dismiss()
 
-            newDocRef.set(postCreation)
-                .addOnSuccessListener {
-                    Toast.makeText(applicationContext,"Post inserted.", Toast.LENGTH_LONG).show()
+                        newDocRef.set(postCreation)
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Post inserted.",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        finish()
+                    }
                 }
-            finish()
         }
         else {
             Toast.makeText(applicationContext,"All fields are require", Toast.LENGTH_LONG).show()
