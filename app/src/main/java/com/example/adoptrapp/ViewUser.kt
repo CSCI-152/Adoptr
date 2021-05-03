@@ -48,13 +48,13 @@ class ViewUser : AppCompatActivity(), (ViewUserModel) -> Unit {
 
     override fun invoke(p1: ViewUserModel) {
         val bundle = bundleOf(
+            "id" to p1.id,
             "email" to p1.email,
             "fullName" to p1.fullName,
             "role" to p1.role
         )
         val i = Intent(this, ViewUserDisplayTemplate::class.java)
         i.putExtras(bundle)
-        finish()
         startActivity(i)
     }
 }

@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -12,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_view_user_display_template.*
 
 class ViewUserDisplayTemplate : AppCompatActivity() {
 
-    private val firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +22,7 @@ class ViewUserDisplayTemplate : AppCompatActivity() {
         val fName = intent.getStringExtra("fullName")
         val mail = intent.getStringExtra("email")
         val status = intent.getStringExtra("role")
+        val id = intent.getStringExtra("id")
 
         //set items to layout
         fullName.text = fName
@@ -28,19 +30,33 @@ class ViewUserDisplayTemplate : AppCompatActivity() {
         role.text = status
 
         banbutton.setOnClickListener {
-            banUser(fName, mail, status)
+            banUser(id)
         }
 
         centerbutton.setOnClickListener {
-            makeCenter(fName, mail, status)
+            makeCenter(id)
         }
     }
 
-    private fun makeCenter(fName:String?, mail:String?, status:String?) {
-        TODO("Not yet implemented")
+    private fun makeCenter(id:String?) {
+        if(id != null){
+            db.collection("users")
+                .document(id)
+                .update("role", "center")
+                .addOnSuccessListener {
+                    Toast.makeText(applicationContext, "User become Center", Toast.LENGTH_LONG).show()
+                }
+        }
     }
 
-    private fun banUser(fName:String?, mail:String?, status:String?) {
-
+    private fun banUser(id:String?) {
+        if (id != null) {
+            db.collection("users")
+                .document(id)
+                .delete()
+                .addOnSuccessListener {
+                    Toast.makeText(applicationContext, "User Banned", Toast.LENGTH_LONG).show()
+                }
+        }
     }
 }

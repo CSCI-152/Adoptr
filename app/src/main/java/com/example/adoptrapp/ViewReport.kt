@@ -50,13 +50,13 @@ class ViewReport : AppCompatActivity(), (ViewReportModel) -> Unit {
 
     override fun invoke(p1: ViewReportModel) {
         var bundle = bundleOf(
+            "id" to p1.id,
             "topic" to p1.topic,
             "desc" to p1.desc,
             "reason" to p1.reason
         )
         val i = Intent(this, ViewReportDisplayTemplate::class.java)
         i.putExtras(bundle)
-        finish()
         startActivity(i)
     }
 
