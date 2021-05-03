@@ -3,6 +3,7 @@ package com.example.adoptrapp
 import com.google.firebase.Timestamp
 
 data class PostModel(
+    val id: String? = "",
     val author: String? ="",
     val title: String? = "",
     val description: String? = "",

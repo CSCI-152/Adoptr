@@ -101,7 +101,7 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
         val bundle = bundleOf(
             "title" to title
         )
-        val i = Intent(this.context, ListDisplayTemplateActivity::class.java)
+        val i = Intent(this.context, TemplateListDisplayActivity::class.java)
         i.putExtras(bundle)
         startActivity(i)
     }

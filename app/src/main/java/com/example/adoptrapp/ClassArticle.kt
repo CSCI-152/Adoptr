@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class ClassArticle(
+    val id: String = "",
     val title: String = "No title Inputted",
     val authorID: String = "",
     // saves the postDate as the current date in Year-Month-Day format

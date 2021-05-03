@@ -64,15 +64,18 @@ class CreateArticleActivity : AppCompatActivity(), View.OnClickListener {
         val body = editTextBody.text.toString().trim()
         val uid = Firebase.auth.currentUser!!.uid
 
+        val newDocRef = db.collection("articles").document()
+
         val data = ClassArticle(
+            id = newDocRef.id,
             title = title,
             authorID = uid,
-            // postDate is set to its default value
+            // postDate is set by the class
             description = body
         )
-        db.collection("articles").add(data)
+        newDocRef.set(data)
             .addOnSuccessListener { documentReference ->
-                Log.d(ContentValues.TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+                Log.d(ContentValues.TAG, "DocumentSnapshot written with ID: ${newDocRef.id}")
             }
             .addOnFailureListener { e ->
                 Log.w(ContentValues.TAG, "Error adding document", e)

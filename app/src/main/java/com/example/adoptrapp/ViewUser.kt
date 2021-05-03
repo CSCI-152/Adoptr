@@ -24,7 +24,7 @@ class ViewUser : AppCompatActivity() {
                 for (document in it.result!!){
                     result.append(document.data.getValue("role")).append("\n")
                 }
-                displayResult2.setText(result)
+                displayResult2.text = result
             }
     }
 }

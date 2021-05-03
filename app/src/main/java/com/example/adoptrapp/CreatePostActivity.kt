@@ -59,7 +59,7 @@ class CreatePostActivity : AppCompatActivity() {
 
         val uid = Firebase.auth.currentUser?.uid
 
-        val title = create_post_title.text.toString().trim() //createpost titile
+        val title = create_post_title.text.toString().trim() //createpost title
         val description = editText.text.toString().trim() //createpost description
         val animalTag = spinner.selectedItem.toString().trim()
         val ageTag = spinner2.selectedItem.toString().trim()
@@ -85,12 +85,23 @@ class CreatePostActivity : AppCompatActivity() {
                 }
             pd.dismiss()
 
-            //insert title and descript of pet happen below here
+            //insert title and description of pet happen below here
             val createPost = FirebaseFirestore.getInstance()
-            val postCreation = PostModel(uid, title, description, time, imgID, animalTag, ageTag, genderTag)
+            val newDocRef = createPost.collection("Listings").document()
+            newDocRef.id
 
-            createPost.collection("Listings")
-                .add(postCreation)
+            val postCreation = PostModel(
+                id = newDocRef.id,          // stores the id of the document as a field
+                author = uid,               // current user as author of document
+                title = title,              // storing general data about the listing
+                description = description,
+                date = time,
+                image = imgID,
+                tag1 = animalTag,
+                tag2 = ageTag,
+                tag3 = genderTag
+            )
+            newDocRef.set(postCreation)
                 .addOnSuccessListener {
                     Toast.makeText(applicationContext,"Post inserted.", Toast.LENGTH_LONG).show()
                 }

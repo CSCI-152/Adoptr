@@ -30,14 +30,13 @@
         android:id="@+id/phone"
         android:layout_width="231dp"
         android:layout_height="97dp"
+        android:layout_marginTop="88dp"
         android:autoLink="phone"
         android:text="Shelter Phone Number"
         android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/messageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintVertical_bias="0.574"
         tools:ignore="MissingConstraints" />
 
     <Button

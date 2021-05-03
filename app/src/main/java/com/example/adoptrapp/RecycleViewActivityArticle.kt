@@ -11,11 +11,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 
-open class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
+class RecycleViewActivityArticle : AppCompatActivity(), (ClassArticle) -> Unit {
 
     private val firebaseFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private var postList: List<PostModel> = ArrayList()
-    private val recycleViewAdapter : RecycleViewAdapterPost = RecycleViewAdapterPost(postList,this)
+    private var articleList: List<ClassArticle> = ArrayList()
+    private val recycleViewAdapter : RecycleViewAdapterArticle = RecycleViewAdapterArticle(articleList,this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +29,10 @@ open class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
     }
 
     private fun loadData(){
-        getPostList().addOnCompleteListener{
+        getArticleList().addOnCompleteListener{
             if(it.isSuccessful){
-                postList = it.result!!.toObjects(PostModel::class.java)
-                recycleViewAdapter.postListItem = postList
+                articleList = it.result!!.toObjects(ClassArticle::class.java)
+                recycleViewAdapter.articleListItem = articleList
                 recycleViewAdapter.notifyDataSetChanged()
             }
             else{
@@ -41,20 +41,28 @@ open class RecycleViewActivity : AppCompatActivity(), (PostModel) -> Unit {
         }
     }
 
-    private fun getPostList(): Task<QuerySnapshot>{
+    private fun getArticleList(): Task<QuerySnapshot>{
         return firebaseFirestore
-            .collection("Listings")
+            .collection("articles")
             .orderBy("date", Query.Direction.DESCENDING)
             .get()
     }
 
     //passing values onclick
-    override fun invoke(postModel: PostModel) {
-        val title = postModel.title.toString()
-        var bundle = bundleOf(
-            "title" to title
+    override fun invoke(classArticle: ClassArticle) {
+
+        val title = classArticle.title.trim()
+        val postDate = classArticle.postDate.trim()
+        val author = classArticle.authorID.trim()
+        val body = classArticle.description.trim()
+        val bundle = bundleOf(
+            "title" to title,
+            "postDate" to postDate,
+            "author" to author,
+            "body" to body
         )
-        val i = Intent(this, ListDisplayTemplateActivity::class.java)
+
+        val i = Intent(this, TemplateArticleDisplayActivity::class.java)
         i.putExtras(bundle)
         startActivity(i)
     }

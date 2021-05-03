@@ -33,7 +33,7 @@ This makes the drawer button in the topleft
             android:layout_height="0dp"
             android:fitsSystemWindows="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toBottomOf="@+id/navBottom_menu"
+            app:layout_constraintBottom_toTopOf="@+id/navBottom_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include2">

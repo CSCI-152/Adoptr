@@ -3,9 +3,9 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/navBottom_article"
-            android:title="@string/navBottom_articles"
-            android:icon="@drawable/ic_article" />
+            android:id="@+id/navBottom_home"
+            android:title="@string/navBottom_home"
+            android:icon="@drawable/ic_home" />
 
         <item
             android:id="@+id/navBottom_search"
@@ -13,14 +13,16 @@
             android:icon="@drawable/ic_search" />
 
         <item
-            android:id="@+id/navBottom_home"
-            android:title="@string/navBottom_home"
-            android:icon="@drawable/ic_home" />
+            android:id="@+id/navBottom_article"
+            android:title="@string/navBottom_articles"
+            android:icon="@drawable/ic_article" />
 
+        <!--
         <item
             android:id="@+id/navBottom_mail"
             android:title="@string/navBottom_messages"
             android:icon="@drawable/ic_mail" />
+        -->
 
         <item
             android:id="@+id/navBottom_profile"

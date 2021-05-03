@@ -105,14 +105,6 @@ class LandingActivity : AppCompatActivity(){
                     drawerLayout?.closeDrawers()
                     true
                 }
-                R.id.nav_help -> {
-                    // onclick event
-                    it.isChecked = true
-                    // the toast is for testing purposes only
-                    Toast.makeText(this.baseContext, "Help Selected", Toast.LENGTH_SHORT).show()
-                    drawerLayout?.closeDrawers()
-                    true
-                }
                 R.id.nav_support_ticket -> {
                     // onclick event
                     it.isChecked = true
@@ -217,12 +209,14 @@ class LandingActivity : AppCompatActivity(){
                     openFragment(homeFragment)
                     true
                 }
+                /*
                 R.id.navBottom_mail -> {
 
                     val inboxFragment = FragmentInbox.newInstance()
                     openFragment(inboxFragment)
                     true
                 }
+                */
                 R.id.navBottom_profile -> {
 
                     val homeFragment = FragmentProfile.newInstance()

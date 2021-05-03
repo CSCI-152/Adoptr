@@ -86,6 +86,11 @@
     <string name="article_title">Article Title</string>
     <string name="article_description">Article Description</string>
     <string name="create_article">Create article</string>
+    <string name="default_body">Default Body</string>
+    <string name="default_title">Default Title</string>
+    <string name="back_button">back_button</string>
+    <string name="default_author">Default Author</string>
+    <string name="default_date">Default Date</string>
 
     <!-- Spinner1 on the support ticket page-->
     <string-array name="supportSpinner1">

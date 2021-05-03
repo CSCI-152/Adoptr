@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
 import android.widget.Toast.makeText
+import androidx.core.os.persistableBundleOf
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
@@ -65,13 +66,25 @@ class FragmentProfile : Fragment() {
                         // converts the grabbed document to ClassUser object class and takes the petMarks List
                         val classObj = task.result!!.toObject<ClassUser>()
                         petMarksList = classObj?.petMarks
+                        var mutablePetMarksList =
                         if (!petMarksList.isNullOrEmpty()) {
+                            /*
+                            for (i in petMarksList!!) {
+                                val newList = db.collection("listings").whereEqualTo("url", i).get()
+                                    .addOnCompleteListener { task2 ->
+                                        if(task2.isSuccessful) {
+                                            val
+                                        }
+
+                                    } // END addOnCompleteListener
+                            }
+
                             // not empty or null
-                            val mutablePetMarksList = petMarksList!!.toMutableList()
+
                             val arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_list_item_1, mutablePetMarksList)
                             listView = view.findViewById(R.id.profilePetMarks)
                             listView.adapter = arrayAdapter
-
+*/
                         } // END if CASE
                         else {
                             makeText(

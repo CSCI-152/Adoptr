@@ -14,23 +14,7 @@ class ContactPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_page)
 
-        //back button not needed as for now, android has default back button
-        //create action bar
-        //val actionbar = supportActionBar
-        //title of page in action bar
-        //supportActionBar!!.title = "Contact Page"
-        //sets action bar to top of screen
-        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
         //add button to go to page to send a text message to adoption shelter
-        val messagebtn = findViewById<Button>(R.id.messageButton)
-
-        messagebtn.setOnClickListener {
-            val intent = Intent(this, messager::class.java)
-            startActivity(intent)
-        }
-
         // connect to database
         val db = FirebaseFirestore.getInstance()
 

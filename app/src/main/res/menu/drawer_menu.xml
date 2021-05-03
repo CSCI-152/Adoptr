@@ -28,11 +28,6 @@
             android:visible="true" />
 
         <item
-            android:id="@+id/nav_help"
-            android:menuCategory="secondary"
-            android:title="@string/navDrawer_help" />
-
-        <item
             android:id="@+id/nav_support_ticket"
             android:menuCategory="secondary"
             android:title="@string/navDrawer_support_ticket" />

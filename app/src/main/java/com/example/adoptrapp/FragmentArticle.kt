@@ -58,15 +58,19 @@ class FragmentArticle: Fragment(), (ClassArticle) -> Unit {
             //.orderBy("date", Query.Direction.DESCENDING)
             .get()
     }
-    override fun invoke(p1: ClassArticle) {
+    override fun invoke(classArticle: ClassArticle) {
         // Need to put make this work for articles.
+        val title = classArticle.title.toString().trim()
+        val postDate = classArticle.postDate.toString().trim()
+        val author = classArticle.authorID.toString().trim()
+        val body = classArticle.description.toString().trim()
         val bundle = bundleOf(
-            "title" to p1.title,
-            "body" to p1.description,
-            "authorId" to p1.authorID,
-            "postDate" to p1.postDate
+            "title" to title,
+            "postDate" to postDate,
+            "author" to author,
+            "body" to body
         )
-        val i = Intent(this.context, ListDisplayTemplateActivity::class.java)
+        val i = Intent(this.context, TemplateArticleDisplayActivity::class.java)
         i.putExtras(bundle)
         startActivity(i)
     }
