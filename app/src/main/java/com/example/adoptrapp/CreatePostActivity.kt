@@ -72,29 +72,35 @@ class CreatePostActivity : AppCompatActivity() {
 
             val time = SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Date())
             val imgID = uid+time
+            var imgURL: String? =""
+            var postCreation: PostModel
 
             //insert image happen below here
             val imageRef: StorageReference = FirebaseStorage.getInstance().reference.child("image/$imgID")
             imageRef.putFile(filepath)
                 .addOnSuccessListener {
                     Toast.makeText(applicationContext,"File uploaded", Toast.LENGTH_SHORT).show()
+                    imageRef.downloadUrl.addOnSuccessListener {
+                        imgURL = it.toString()
+                        postCreation = PostModel(uid, title, description, time, imgID, imgURL, animalTag, ageTag, genderTag)
+
+                        pd.dismiss()
+
+                        //insert title and descript of pet happen below here
+                        val createPost = FirebaseFirestore.getInstance()
+
+                        createPost.collection("Listings")
+                            .add(postCreation)
+                            .addOnSuccessListener {
+                                Toast.makeText(applicationContext,"Post inserted.", Toast.LENGTH_LONG).show()
+                            }
+                        finish()
+                    }
                 }
                 .addOnCanceledListener {
                     pd.dismiss()
                     Toast.makeText(applicationContext,"Upload failed", Toast.LENGTH_LONG).show()
                 }
-            pd.dismiss()
-
-            //insert title and descript of pet happen below here
-            val createPost = FirebaseFirestore.getInstance()
-            val postCreation = PostModel(uid, title, description, time, imgID, animalTag, ageTag, genderTag)
-
-            createPost.collection("Listings")
-                .add(postCreation)
-                .addOnSuccessListener {
-                    Toast.makeText(applicationContext,"Post inserted.", Toast.LENGTH_LONG).show()
-                }
-            finish()
         }
         else{
             Toast.makeText(applicationContext,"All fields are require", Toast.LENGTH_LONG).show()

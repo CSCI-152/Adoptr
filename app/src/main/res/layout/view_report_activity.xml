@@ -6,11 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ViewReport">
 
-    <TextView
-        android:id="@+id/view_report_result"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textStyle="bold"
-        android:textSize="25dp" />
-
+        tools:layout_editor_absoluteX="137dp"
+        tools:layout_editor_absoluteY="106dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

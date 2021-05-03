@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".CreateArticleActivity"></activity>
+        <activity android:name=".ViewReportDisplayTemplate"></activity>
+        <activity android:name=".ViewUserDisplayTemplate" />
+        <activity android:name=".CreateArticleActivity" />
         <activity android:name=".ListDisplayTemplateActivity" />
         <activity android:name=".RecycleViewActivity" />
         <activity android:name=".ViewUser" />

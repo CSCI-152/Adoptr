@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 
 class AdminActivity : AppCompatActivity() {
 
@@ -11,14 +12,27 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.admin_activity)
 
-    }
+        val userButton = findViewById<Button>(R.id.view_user)
+        userButton.setOnClickListener{
+            viewUser()
+        }
 
-    fun view_report() {
-        val intent = Intent(this, ViewReport::class.java)
-        startActivity(intent)
-    }
-    fun view_user() {
+
+        val reportButton = findViewById<Button>(R.id.view_report)
+        reportButton.setOnClickListener{
+            viewReport()
+        }
+    } // END onCreate
+
+    private fun viewUser() {
         val intent = Intent(this, ViewUser::class.java)
+        // finish()
         startActivity(intent)
-    }
-}
+    } // END viewUser
+
+    private fun viewReport() {
+        val intent = Intent(this, ViewReport::class.java)
+        // finish()
+        startActivity(intent)
+    } // END viewReport
+} // END Class
