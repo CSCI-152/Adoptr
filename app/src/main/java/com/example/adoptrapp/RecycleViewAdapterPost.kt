@@ -1,14 +1,10 @@
 package com.example.adoptrapp
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import kotlinx.android.synthetic.main.create_post_activity.view.*
 import kotlinx.android.synthetic.main.item_with_image.view.*
 
 class RecycleViewAdapterPost (var postListItem: List<PostModel>, val clickListener: (PostModel) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){

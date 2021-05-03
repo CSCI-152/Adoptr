@@ -10,10 +10,9 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.Toast
 import android.widget.Toast.makeText
-import androidx.core.os.persistableBundleOf
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.toObject
@@ -42,11 +41,6 @@ class FragmentProfile : Fragment() {
             startActivity(intent)   // sends to the new intent
         }
 
-        val tempPetMarkButton = view.findViewById<Button>(R.id.profileTempButton)
-        tempPetMarkButton.setOnClickListener {
-            addToPetMarks()
-        }
-
         displayPetMarks(view)
         return view
     }
@@ -61,30 +55,51 @@ class FragmentProfile : Fragment() {
             // Fetch the petMarks list from db
             val docRef = db.collection("users").document(uid)
             docRef.get(Source.SERVER)
-                .addOnCompleteListener{ task ->
+                .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         // converts the grabbed document to ClassUser object class and takes the petMarks List
                         val classObj = task.result!!.toObject<ClassUser>()
                         petMarksList = classObj?.petMarks
-                        var mutablePetMarksList =
+                        val titleList = mutableListOf<String>()
+
                         if (!petMarksList.isNullOrEmpty()) {
-                            /*
                             for (i in petMarksList!!) {
-                                val newList = db.collection("listings").whereEqualTo("url", i).get()
+                                db.collection("Listings").document(i).get()
                                     .addOnCompleteListener { task2 ->
                                         if(task2.isSuccessful) {
-                                            val
-                                        }
+                                            val classObj2 = task2.result!!.toObject<PostModel>()
+                                            val newTitle = classObj2!!.title.toString().trim() + "-" + classObj2.id.toString().trim()
+                                            titleList.add(newTitle)
+                                            val arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_list_item_1, titleList)
+                                            listView = view.findViewById(R.id.profilePetMarks)
 
+                                            listView.setOnItemClickListener { parent, view, position, id ->
+                                                val clickedItem = parent.getItemAtPosition(position) // clicked item
+                                                val splitString = clickedItem.toString().split("-")
+                                                val clickedID = splitString.last()
+                                                db.collection("Listings").document(clickedID).get()
+                                                    .addOnCompleteListener { task3 ->
+                                                        if (task3.isSuccessful) {
+                                                            val classObj3 = task3.result!!.toObject<PostModel>()
+                                                            val bundle = bundleOf(
+                                                                "pid" to classObj3!!.id,
+                                                                "title" to classObj3.title,
+                                                                "author" to classObj3.author,
+                                                                "url" to classObj3.url,
+                                                                "desc" to classObj3.description
+                                                            )
+                                                            val intent = Intent(this.context, TemplateListDisplayActivity::class.java)
+                                                            intent.putExtras(bundle)
+                                                            startActivity(intent)
+                                                        }
+                                                    }
+
+                                            }
+
+                                            listView.adapter = arrayAdapter
+                                        }
                                     } // END addOnCompleteListener
                             }
-
-                            // not empty or null
-
-                            val arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_list_item_1, mutablePetMarksList)
-                            listView = view.findViewById(R.id.profilePetMarks)
-                            listView.adapter = arrayAdapter
-*/
                         } // END if CASE
                         else {
                             makeText(
@@ -111,41 +126,6 @@ class FragmentProfile : Fragment() {
             ).show()
         } // END else CASE
     } // END displayPetMarks CASE
-
-
-    // This function should be added to the listing template page
-    private fun addToPetMarks() {
-        val listingID = "asdasd1"   // temporary id of the listing; will be fetched using item id of current view
-                                    // function should be something like the comment below
-                                    // val listingID = view.findViewByID<TextBox>(R.id.idOfTextBox)
-        if (Firebase.auth.currentUser != null) {
-            // The user is logged in
-            val db = FirebaseFirestore.getInstance() // make a connection to the database
-            val uid = Firebase.auth.currentUser!!.uid
-            // val data = hashMapOf( "listingID" to listingID )
-            db.collection("users").document(uid)
-                .update("petMarks", FieldValue.arrayUnion(listingID)) //add its to the petMark array
-                .addOnSuccessListener {
-                    makeText(this.context,
-                        "Account successfully registered!",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                .addOnFailureListener { e ->
-                    makeText(this.context,
-                        e.message.toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-        } // END if CASE
-        else {
-            // Display a Toast telling the user to sign in or sign up
-            makeText(this.context,
-                "Please sign in or register an account for the side menu.",
-                Toast.LENGTH_LONG
-            ).show()
-        } // END else CASE
-    } // END addToPetMarks FUNCTION
 
 } // END fragment CLASS
 

@@ -1,7 +1,5 @@
 package com.example.adoptrapp
 
-import android.net.Uri
-
 data class PostModel(
     val id: String? = "",
     val author: String? ="",

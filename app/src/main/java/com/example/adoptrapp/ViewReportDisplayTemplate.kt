@@ -1,12 +1,10 @@
 package com.example.adoptrapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_view_report_display_template.*
-import kotlinx.android.synthetic.main.activity_view_user_display_template.*
 
 class ViewReportDisplayTemplate : AppCompatActivity() {
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()

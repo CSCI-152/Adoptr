@@ -57,9 +57,14 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
 
                 getSearchList(tag1, tag2, tag3).addOnCompleteListener{
                     if(it.isSuccessful){
-                        postList = it.result!!.toObjects(PostModel::class.java)
-                        recycleViewAdapter.postListItem = postList
-                        recycleViewAdapter.notifyDataSetChanged()
+                        if (it.result!!.isEmpty) {
+                            Toast.makeText(this.context,"No Results!", Toast.LENGTH_LONG).show()
+                        }
+                        else {
+                            postList = it.result!!.toObjects(PostModel::class.java)
+                            recycleViewAdapter.postListItem = postList
+                            recycleViewAdapter.notifyDataSetChanged()
+                        }
                     }
                     else{
                         Toast.makeText(this.context,"Failed to retrieve data", Toast.LENGTH_LONG).show()
@@ -97,7 +102,8 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
 
     //passing values onclick
     override fun invoke(postModel: PostModel) {
-        var bundle = bundleOf(
+        val bundle = bundleOf(
+            "pid" to postModel.id,
             "title" to postModel.title,
             "author" to postModel.author,
             "url" to postModel.url,

@@ -1,9 +1,9 @@
 package com.example.adoptrapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.Task
@@ -49,7 +49,7 @@ class ViewReport : AppCompatActivity(), (ViewReportModel) -> Unit {
     }
 
     override fun invoke(p1: ViewReportModel) {
-        var bundle = bundleOf(
+        val bundle = bundleOf(
             "id" to p1.id,
             "topic" to p1.topic,
             "desc" to p1.desc,
