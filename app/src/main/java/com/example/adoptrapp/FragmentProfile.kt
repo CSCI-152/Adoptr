@@ -11,6 +11,7 @@ import android.widget.ListView
 import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,16 +30,20 @@ class FragmentProfile : Fragment() {
         }
     }
 
+    private var forgotPassButton: Button? = null
+
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        val forgotPassButton = view.findViewById<Button>(R.id.profileChangePassButton)
-        forgotPassButton.setOnClickListener {
-            val intent = Intent(activity, ForgotPasswordActivity::class.java)
-            startActivity(intent)   // sends to the new intent
+        forgotPassButton = view.findViewById(R.id.profileChangePassButton)
+        if (forgotPassButton != null) {
+            forgotPassButton!!.setOnClickListener {
+                val intent = Intent(activity, ForgotPasswordActivity::class.java)
+                startActivity(intent)   // sends to the new intent
+            }
         }
 
         displayPetMarks(view)
@@ -47,7 +52,7 @@ class FragmentProfile : Fragment() {
 
 
     private fun displayPetMarks(view: View) {
-        var petMarksList: List<String>? = emptyList()   // emptyList to not error out when returning
+        var petMarksList: List<String>?   // emptyList to not error out when returning
         if (Firebase.auth.currentUser != null) {
             // Initialize variables/values
             val db = FirebaseFirestore.getInstance() // make a connection to the database
@@ -73,7 +78,7 @@ class FragmentProfile : Fragment() {
                                             val arrayAdapter = ArrayAdapter(this.requireContext(), android.R.layout.simple_list_item_1, titleList)
                                             listView = view.findViewById(R.id.profilePetMarks)
 
-                                            listView.setOnItemClickListener { parent, view, position, id ->
+                                            listView.setOnItemClickListener { parent, _, position, _ ->
                                                 val clickedItem = parent.getItemAtPosition(position) // clicked item
                                                 val splitString = clickedItem.toString().split("-")
                                                 val clickedID = splitString.last()
@@ -120,8 +125,11 @@ class FragmentProfile : Fragment() {
         } // END if CASE
         else {
             // Display a Toast telling the user to sign in or sign up
+            if (forgotPassButton != null) {
+                forgotPassButton!!.isVisible = false
+            }
             makeText(this.context,
-                "Please sign in or register an account for the side menu.",
+                "Please sign in or register an account.",
                 Toast.LENGTH_LONG
             ).show()
         } // END else CASE

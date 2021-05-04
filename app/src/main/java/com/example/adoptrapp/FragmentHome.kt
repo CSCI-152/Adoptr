@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 
 class FragmentHome: Fragment(), (PostModel) -> Unit {
@@ -90,7 +91,7 @@ class FragmentHome: Fragment(), (PostModel) -> Unit {
     private fun getPostList(): Task<QuerySnapshot> {
         return firebaseFirestore
             .collection("Listings")
-            //.orderBy("date", Query.Direction.DESCENDING)
+            .orderBy("date", Query.Direction.DESCENDING)
             .get()
     }
 

@@ -64,8 +64,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterEmail" />
-
+        app:layout_constraintTop_toBottomOf="@+id/enterEmail"
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/confirmPassword"
@@ -80,7 +80,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/enterPassword"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/registerAccount"
@@ -93,28 +94,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
-
-    <ImageView
-        android:id="@+id/togglePassword1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/enterPassword"
-        app:layout_constraintEnd_toEndOf="@+id/enterPassword"
-        app:layout_constraintTop_toTopOf="@+id/enterPassword"
-        app:srcCompat="@android:drawable/ic_menu_view" />
-
-    <ImageView
-        android:id="@+id/togglePassword2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/confirmPassword"
-        app:layout_constraintEnd_toEndOf="@+id/confirmPassword"
-        app:layout_constraintTop_toTopOf="@+id/confirmPassword"
-        app:layout_constraintVertical_bias="0.526"
-        app:srcCompat="@android:drawable/ic_menu_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

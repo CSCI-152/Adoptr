@@ -72,18 +72,6 @@
         app:layout_constraintTop_toTopOf="@+id/bannerImage"
         app:layout_constraintVertical_bias="0.835" />
 
-    <ImageView
-        android:id="@+id/toggleLoginPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_view"
-        tools:layout_editor_absoluteX="314dp"
-        tools:layout_editor_absoluteY="440dp"
-        app:layout_constraintBottom_toBottomOf="@+id/loginPassword"
-        app:layout_constraintEnd_toEndOf="@+id/loginPassword"
-        app:layout_constraintTop_toTopOf="@+id/loginPassword"
-        />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
